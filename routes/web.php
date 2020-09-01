@@ -12,10 +12,12 @@
 */
 
 Route::get('/', function () {
-    return redirect('inicial');
+    return redirect('/inicial');
 });
-
-Route::get('inicial', 'PainelInicialController@indexInicialView')->name('viewInicial');
-
+//Tela Inicial
+Route::get('/inicial', 'PainelInicialController@indexInicialView')->name('viewInicial');
+//
+Route::group(['prefix' => 'usuario'], function () {
+    Route::post('/adicinar', 'CadastroUsuarioController@cadastroUser')->name("cadastroUser");
+});
 Auth::routes();
-
