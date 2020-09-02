@@ -11,7 +11,7 @@ class PainelInicialController extends Controller
     {
         return view('Cliente.PaginaInicial/cardsEslide');
     }
-
+    //
     public function indexSlide()
     {
     }

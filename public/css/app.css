@@ -1,3 +1,43 @@
-.logoInicial{
+.logoInicial {
     width: 57%;
+}
+
+.shop-menu ul li a {
+    background: transparent !important;
+
+}
+.navbar-nav li ul.sub-menu li a:hover {
+    color: #000000;
+}
+
+
+
+.rm0Cadastro {
+    margin-right: 0% !important;
+}
+
+.labelsLogin {
+    padding: 0 !important;
+}
+
+.form-horizontal .control-label,
+.form-horizontal .radio,
+.form-horizontal .checkbox,
+.form-horizontal .radio-inline,
+.form-horizontal .checkbox-inline {
+    margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.col-md-6 {
+    width: 54%;
 }

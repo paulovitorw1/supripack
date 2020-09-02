@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
 });
@@ -15,7 +16,17 @@ $("#btnCadastroUser").on('click', function (e) {
 
 
         }, error: function (erros) {
-            console.log(erros);
+            jsonErro = erros.responseJSON.errors;
+            $.each(jsonErro, function (indexInArray, valueOfElement) {
+                $(".erro_" + indexInArray).addClass('control-label');
+                $("." + indexInArray).html(valueOfElement);
+                $("." + indexInArray).click(function (e) {
+                    $(".erro_" + indexInArray).removeClass('control-label');
+                    $("." + indexInArray).html('');
+
+
+                });
+            });
         }
     });
 

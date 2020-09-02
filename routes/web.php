@@ -20,4 +20,8 @@ Route::get('/inicial', 'PainelInicialController@indexInicialView')->name('viewIn
 Route::group(['prefix' => 'usuario'], function () {
     Route::post('/adicinar', 'CadastroUsuarioController@cadastroUser')->name("cadastroUser");
 });
+//
+Route::group(['prefix' => 'admin/config'], function () {
+    Route::get('/cadastro/carrossel', 'CarrosselAndCardController@CarrosselAndCard')->name("ssss");
+});
 Auth::routes();

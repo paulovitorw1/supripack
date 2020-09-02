@@ -15,8 +15,9 @@
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                                     document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
 
@@ -46,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class=" control-label">Password</label>
+                                <label for="password" class="control-label">Password</label>
 
                                 <div class="">
                                     <input id="password" type="password" name="password" required>
@@ -85,20 +86,50 @@
                 <div class="col-sm-1">
                     <h2 class="or">OR</h2>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="signup-form" id="registrarUser">
                         <!--sign up form-->
                         <h2>New User Signup!</h2>
                         <form class="form-horizontal" id="formCadastro" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <label for="nomeCadastro">Nome</label>
-                            <input type="text" name="nome" placeholder="Digte seu nome" />
-                            <label for="emailCadastro">E-mail</label>
-                            <input type="email" name="email" placeholder="Digite seu E-mail" />
-                            <label for="senhaCadastro">Senha</label>
-                            <input type="password" name="password" placeholder="Digte sua senha" />
-                            <label for="senhaCadastro">Confirma senha</label>
-                            <input type="password" name="password_confirmation" placeholder="Confirme sua senha" />
+                            <div class="form-row has-error">
+                                <div class="form-group col-md-6 rm0Cadastro">
+                                    <label for="nomeCadastro " class="erro_nome  labelsLogin">Nome</label>
+                                    <input type="text" name="nome" class="nome" placeholder="Digte seu nome" />
+                                    <span class="help-block">
+                                        <strong class="nome"></strong>
+                                    </span>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="emailCadastro" class=" erro_email labelsLogin">E-mail</label>
+                                    <input type="email" name="email" class="email" placeholder="Digite seu E-mail" />
+                                    <span class="help-block">
+                                        <strong class="email"></strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-row has-error">
+                                <div class="form-group col-md-6 rm0Cadastro">
+                                    <label for="senhaCadastro" class="erro_password labelsLogin">Senha</label>
+                                    <input type="password" name="password" class="password" placeholder="Digte sua senha" />
+                                    <span class="help-block">
+                                        <strong class="password"></strong>
+                                    </span>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="senhaCadastro" class="erro_password_confirmation labelsLogin">Confirma
+                                        senha</label>
+                                    <input type="password" name="password_confirmation" class="password_confirmation" placeholder="Confirme sua senha" />
+                                    <span class="help-block">
+                                        <strong class="password_confirmation"></strong>
+                                    </span>
+                                </div>
+                            </div>
+
+
                             <button type="button" class="btn btn-primary" id="btnCadastroUser">Criar</button>
                         </form>
                     </div>
