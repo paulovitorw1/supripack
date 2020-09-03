@@ -22,6 +22,7 @@ Route::group(['prefix' => 'usuario'], function () {
 });
 //
 Route::group(['prefix' => 'admin/config'], function () {
-    Route::get('/cadastro/carrossel', 'CarrosselAndCardController@CarrosselAndCard')->name("ssss");
+    Route::get('/', 'ConfiguracaoController@indexConfiguracao')->name("ssss");
+    Route::get('/carousel', 'ConfiguracaoController@carousel')->name("view");
 });
 Auth::routes();

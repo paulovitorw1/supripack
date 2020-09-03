@@ -74,7 +74,7 @@
 							<ul class="nav navbar-nav">
 								<li class="dropdown"><a href="#"><i class="fa fa-user"></i>Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="/admin/config/cadastro/carrossel">Config</a></li>
+                                        <li><a href="/admin/config/cadastro/carousel">Config</a></li>
                                         <li><a href="product-details.html">Product Details</a></li>
 
                                     </ul>

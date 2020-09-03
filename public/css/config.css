@@ -1,0 +1,25 @@
+.img-responsive {
+    max-width: 100% !important;
+    width: 1065px !important;
+    height: 310px !important;
+}
+
+.btnAcoesCarousel {
+    float: right;
+}
+
+.linkcarousel {
+    background-color: #c2c2c1;
+    color: black
+}
+
+.btn {
+    border: 0 none;
+    border-radius: 0;
+    margin-top: 16px;
+}
+
+.btn-warning {
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
