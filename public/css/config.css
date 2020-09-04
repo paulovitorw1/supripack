@@ -23,3 +23,14 @@
     margin-left: 0.5%;
     margin-right: 0.5%;
 }
+
+#similar-product .carousel-inner .item .img-add {
+    display: inline-block;
+    margin-left: 11px;
+}
+
+.modal-header {
+    min-height: 16.428571429px;
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}

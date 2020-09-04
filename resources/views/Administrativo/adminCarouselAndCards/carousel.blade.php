@@ -88,27 +88,41 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></h5>
+
                 </div>
-                <div class="modal-body">
-                    <div class="col-sm-12">
-                        <div class="view-product">
-                            <img src="{{ asset('img/home/girl1.jpg') }}" class="girl img-responsive" alt="">
+                <div class="modal-body" style="padding: 0;">
+                    <div class="col">
+                        <div class="view-product" id="ttttttt">
+                            <form id="formUpload" method="POST" enctype="multipart/form-data">
+                                {{ csrf_token() }}
+                                <div class="file-loading">
+                                    <input id="kv-explorer" type="file" name="testeaaa[]" multiple>
+                                </div>
+
+                                <br>
+                            </form>
                         </div>
                         <div id="similar-product" class="carousel slide" data-ride="carousel">
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <a href=""><img src="{{ asset('img/product-details/similar1.jpg') }}" alt=""></a>
-                                    <a href=""><img src="{{ asset('img/product-details/similar2.jpg') }}" alt=""></a>
-                                    <a href=""><img src="{{ asset('img/product-details/similar3.jpg') }}" alt=""></a>
-                                    <a href=""><img src="{{ asset('img/product-details/similar3.jpg') }}" alt=""></a>
-                                    <a href=""><img src="{{ asset('img/product-details/similar3.jpg') }}" alt=""></a>
-                                    <a href=""><img src="{{ asset('img/product-details/similar3.jpg') }}" alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                            alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar2.jpg') }}"
+                                            alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                            alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                            alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                            alt=""></a>
+                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                            alt=""></a>
 
                                 </div>
 
@@ -121,17 +135,32 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" id="btnform" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+
     {{-- FIM MODEL ADD CAROUSEL --}}
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/config.css') }}">
+    <link href="{{ asset('libs/input-file/css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="{{ asset('libs/input-file/themes/explorer-fas/theme.css') }}" media="all" rel="stylesheet"
+        type="text/css" />
+
+
 @endsection
 @section('js')
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous">
+    </script> --}}
     <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('libs/input-file/js/plugins/piexif.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/input-file/js/plugins/sortable.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/input-file/js/fileinput.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/input-file/js/locales/pt-BR.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/input-file/themes/fas/theme.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('libs/input-file/themes/explorer-fas/theme.js') }}" type="text/javascript"></script>
 
 @endsection
 

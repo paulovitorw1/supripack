@@ -15,4 +15,9 @@ class ConfiguracaoController extends Controller
     {
         return view('Administrativo.adminCarouselAndCards/carousel');
     }
+    public function carouselAdd(Request $request)
+    {
+        dd($request->testeaaa);
+        return $request;
+    }
 }

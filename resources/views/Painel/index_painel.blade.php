@@ -8,6 +8,7 @@
 	<meta name="author" content="">
 	<title>Supripack</title>
 	<link rel="supripack icon" href="img/iconSupripack.jpg">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link href="{{ asset('libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('libs/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('libs/bootstrap/css/prettyPhoto.css') }}" rel="stylesheet">
