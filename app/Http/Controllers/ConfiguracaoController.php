@@ -17,7 +17,7 @@ class ConfiguracaoController extends Controller
     }
     public function carouselAdd(Request $request)
     {
-        dd($request->testeaaa);
-        return $request;
+        dd($request);
+        // return $request;
     }
 }

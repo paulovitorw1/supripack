@@ -74,7 +74,7 @@
             <button type="button" class="btnAcoesCarousel btn btn-danger" id="btnDeletecarousel"><i
                     class="fas fa-trash"></i></button>
             <button type="button" class="btnAcoesCarousel btn btn-warning"><i class="fas fa-edit"></i></button>
-            <button type="button" onclick="addItemcarousel()" class="btnAcoesCarousel btn btn-primary"><i
+            <button type="button" onclick="addItemcarousel();" class="btnAcoesCarousel btn btn-primary"><i
                     class="fas fa-plus-square"></i></button>
 
         </div>
@@ -98,15 +98,16 @@
                     <div class="col">
                         <div class="view-product" id="ttttttt">
                             <form id="formUpload" method="POST" enctype="multipart/form-data">
-                                {{ csrf_token() }}
                                 <div class="file-loading">
                                     <input id="kv-explorer" type="file" name="testeaaa[]" multiple>
                                 </div>
 
+
                                 <br>
                             </form>
                         </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
+                        {{-- <div id="similar-product" class="carousel slide"
+                            data-ride="carousel">
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
@@ -129,13 +130,14 @@
 
                             </div>
 
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="btnform" class="btn btn-primary">Save changes</button>
+                    <button type="button"  id="btnform" class="btn btn-primary">Save
+                        changes</button>
                 </div>
             </div>
         </div>
