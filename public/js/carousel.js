@@ -16,8 +16,9 @@ $(document).ready(function () {
         'elErrorContainer': '#errorBlock'
     });
 
-
+    //INICIANDO O LAYOUT DE UPLOAD DE IMAGEM
     $("#kv-explorer").fileinput({
+        //O modelo do Layout
         'theme': 'explorer-fas',
         overwriteInitial: false,
         uploadUrl: '/admin/config/carousel/adicinar',
@@ -30,17 +31,18 @@ $(document).ready(function () {
             showUpload: false, //This remove the upload button
             showDrag: false
         },
+        // browseClass: "btn btn-success",
+        // browseLabel: "Pick Image",
+        // browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+        removeClass: "btn btn-danger",
+        removeIcon: "<i class=\"fas fa-trash-alt\"></i> ",
 
 
     });
+    //SUBMIT PARA UPLOAD DAS IMAGEM
     $("#btnform").on("click", function () {
         $("#kv-explorer").fileinput('upload');
     });
-    /*
-     $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
-     alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
-     });
-     */
 
 });
 
