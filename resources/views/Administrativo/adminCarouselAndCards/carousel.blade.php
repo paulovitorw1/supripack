@@ -5,13 +5,14 @@
         <div class="col-sm-12">
             <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#slider-carousel" data-slide-to="0" class=""></li>
-                    <li data-target="#slider-carousel" data-slide-to="1" class=""></li>
-                    <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    @foreach ($consultaImagemCarusel as $item)
+                        <li data-target="#slider-carousel" data-slide-to="{{ $item->id_e_carousel }}" class=""></li>
+                    @endforeach
                 </ol>
 
                 <div class="carousel-inner">
-                    <div class="item">
+                    <div class="item active">
+
                         {{-- <div class="col-sm-12"> --}}
                             {{-- <h1><span>E</span>-SUPRIPACK</h1>
                             <h2>TESTE</h2> --}}
@@ -23,40 +24,29 @@
                             {{--
                         </div> --}}
                         <div class="col-sm-12">
-                            <img src="{{ asset('img/home/girl1.jpg') }}" class="girl img-responsive" alt="">
-                        </div>
-                    </div>
-                    <div class="item active left">
-                        <div class="col-sm-12">
-                            {{-- <h1><span>E</span>-SUPRIPACK</h1>
-                            --}}
-                            {{-- <h2>100% Responsive Design</h2>
-                            --}}
-                            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua. </p>
-                            <button type="button" class="btn btn-default get">Get it now</button>
-                            --}}
-                        </div>
-                        <div class="col-sm-12">
-                            <img src="{{ asset('img/home/girl1.jpg') }}" class="girl img-responsive" alt="">
-                        </div>
-                    </div>
 
-                    <div class="item next left">
-                        <div class="col-sm-12">
-                            {{-- <h1><span>E</span>-SUPRIPACK</h1>
-                            --}}
-                            {{-- <h2>Free Ecommerce Template</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua. </p>
-                            <button type="button" class="btn btn-default get">Get it now</button>
-                            --}}
-                        </div>
-                        <div class="col-sm-12">
                             <img src="{{ asset('img/home/girl1.jpg') }}" class="girl img-responsive" alt="">
                         </div>
                     </div>
+                    @foreach ($consultaImagemCarusel as $item)
+                        <div class="item next">
+                            <div class="col-sm-12">
+                                {{-- <h1><span>E</span>-SUPRIPACK</h1>
+                                --}}
+                                {{-- <h2>Free Ecommerce Template</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut
+                                    labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                                --}}
+                            </div>
+                            <div class="col-sm-12">
+                                <img src="{{ asset('img_carousel') }}/{{ $item->imagem }}" class="girl img-responsive"
+                                    alt="">
+                            </div>
+                        </div>
+                    @endforeach
+
 
                 </div>
 
@@ -98,9 +88,9 @@
                     <div class="col">
                         <div class="view-product" id="ttttttt">
                             <form id="formUpload" method="POST" enctype="multipart/form-data">
-                                <div class="file-loading">
-                                    <input id="kv-explorer" type="file" name="testeaaa[]" multiple>
-                                </div>
+                                {{-- <div class="file"> --}}
+                                    <input id="kv-explorer" type="file" id="inputfileCa" name="testeaaa[]" multiple>
+                                    {{-- </div> --}}
 
 
                                 <br>
@@ -136,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button"  id="btnform" class="btn btn-primary">Save
+                    <button type="button" id="btnform" class="btn btn-primary">Save
                         changes</button>
                 </div>
             </div>

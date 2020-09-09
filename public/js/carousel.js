@@ -41,12 +41,37 @@ $(document).ready(function () {
     });
     //SUBMIT PARA UPLOAD DAS IMAGEM
     $("#btnform").on("click", function () {
-        $("#kv-explorer").fileinput('upload');
+        if ($("#inputfileCa").val() == null) {
+            $("#kv-explorer").fileinput('upload');
+        } else {
+            $("#kv-explorer").fileinput('upload');
+            $.ajax({
+                type: "POST",
+                url: "/admin/config/carousel/adicinar",
+                dataType: "JSON",
+                success: function (data) {
+                    // Swal.fire({
+                    //     icon: 'success',
+                    //     position: 'top',
+                    //     title: ' teste',
+                    //     text: 'sssss'
+                    // });
+                    // setInterval(() => {
+                    //     location.reload();
+                    // }, 2000);
+
+                }, error: function (erros) {
+                    alert("error");
+                }
+            });
+        }
+
     });
 
 });
 
 function addItemcarousel() {
+    $("#kv-explorer").fileinput('clear');
     $("#modalAddItemCarousel").modal('show');
 
 
