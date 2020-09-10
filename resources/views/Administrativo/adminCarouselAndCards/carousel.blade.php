@@ -30,16 +30,7 @@
                     </div>
                     @foreach ($consultaImagemCarusel as $item)
                         <div class="item next">
-                            <div class="col-sm-12">
-                                {{-- <h1><span>E</span>-SUPRIPACK</h1>
-                                --}}
-                                {{-- <h2>Free Ecommerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                                --}}
-                            </div>
+
                             <div class="col-sm-12">
                                 <img src="{{ asset('img_carousel') }}/{{ $item->imagem }}" class="girl img-responsive"
                                     alt="">
@@ -63,7 +54,8 @@
         <div class="row-group">
             <button type="button" class="btnAcoesCarousel btn btn-danger" id="btnDeletecarousel"><i
                     class="fas fa-trash"></i></button>
-            <button type="button" class="btnAcoesCarousel btn btn-warning"><i class="fas fa-edit"></i></button>
+            <button type="button" onclick="editarCarousel();" class="btnAcoesCarousel btn btn-warning"><i
+                    class="fas fa-edit"></i></button>
             <button type="button" onclick="addItemcarousel();" class="btnAcoesCarousel btn btn-primary"><i
                     class="fas fa-plus-square"></i></button>
 
@@ -72,13 +64,13 @@
     {{-- MODAL ADD ITEM CAROUSEL --}}
     <!-- Button trigger modal -->
 
-    <!-- Modal -->
+    <!-- Modal add -->
     <div class="modal fade" id="modalAddItemCarousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title <button type="button" class="close"
+                    <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Imagens<button type="button" class="close"
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></h5>
@@ -128,6 +120,80 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" id="btnform" class="btn btn-primary">Save
                         changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal EDITAR -->
+    <div class="modal fade" id="modalEditItemCarousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Imagens<button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></h5>
+
+                </div>
+                <div class="modal-body" style="padding: 0;">
+                    <form id="formcarouselPreviwEdit" method="POST" action="" enctype="multipart/form-data">
+                        <br>
+                        <div class="container-fluid">
+                            <div class="row rowPreviwEdit">
+                                @foreach ($consultaImagemCarusel as $imagemEDit)
+                                    <div class="col-sm-4 imgUp">
+                                        <div class="imagePreview"
+                                            style="background-image: url(http://192.168.15.127:8000/img_carousel/{{ $imagemEDit->imagem }})">
+                                        </div>
+                                        <label class="btn btn-primary btnUploadEdit">
+                                            Upload<input type="file" name="imgEditar[]"
+                                                data-id="{{ $imagemEDit->id_e_carousel }}" class="uploadFile img"
+                                                value="{{ $imagemEDit->imagem }}"
+                                                style="width: 0px;height: 0px;overflow: hidden;">
+                                            <input type="hidden" name="idImgEditar[]"
+                                                value="{{ $imagemEDit->id_e_carousel }}">
+                                        </label>
+                                    </div><!-- col-2 -->
+
+                                @endforeach
+
+
+                            </div><!-- row -->
+                        </div><!-- container -->
+                        <br>
+                    </form>
+                    {{-- <div id="similar-product" class="carousel slide"
+                        data-ride="carousel">
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                        alt=""></a>
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar2.jpg') }}"
+                                        alt=""></a>
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                        alt=""></a>
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                        alt=""></a>
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                        alt=""></a>
+                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
+                                        alt=""></a>
+
+                            </div>
+
+
+                        </div>
+
+                    </div> --}}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" id="btnformEditar" class="btn btn-primary">Editar</button>
                 </div>
             </div>
         </div>

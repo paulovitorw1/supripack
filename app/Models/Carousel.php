@@ -9,7 +9,7 @@ class Carousel extends Model
     //tabela
     protected $table = 'e_carousel';
     //chave primaria
-    protected $primarykey = 'id_e_carousel';
+    protected $primaryKey = 'id_e_carousel';
 
     const CREATED_AT = 'data_de_criacao';
     const UPDATED_AT = 'data_atualizacao';

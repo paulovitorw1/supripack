@@ -24,7 +24,7 @@ Route::group(['prefix' => 'usuario'], function () {
 Route::group(['prefix' => 'admin/config'], function () {
     Route::get('/', 'ConfiguracaoController@indexConfiguracao')->name("ssss");
     Route::get('/carousel', 'ConfiguracaoController@carousel')->name("view");
-    Route::any('/carousel/adicinar', 'ConfiguracaoController@carouselAdd')->name("view");
-
+    Route::any('/carousel/adicinar', 'ConfiguracaoController@carouselAdd')->name("adicionarImgCarousel");
+    Route::post('/carousel/editar', 'ConfiguracaoController@editarCarousel')->name("editarCarousel");
 });
 Auth::routes();
