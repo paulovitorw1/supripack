@@ -150,10 +150,10 @@
                                         <label class="btn btn-primary btnUploadEdit">
                                             Upload<input type="file" name="imgEditar[]"
                                                 data-id="{{ $imagemEDit->id_e_carousel }}" class="uploadFile img"
-                                                value="{{ $imagemEDit->imagem }}"
+                                                value="{{ $imagemEDit->id_e_carousel }}"
                                                 style="width: 0px;height: 0px;overflow: hidden;">
-                                            <input type="hidden" name="idImgEditar[]"
-                                                value="{{ $imagemEDit->id_e_carousel }}">
+                                            <input type="hidden" name="idImgEditar[]" class="valorIdImg deletInput"
+                                                value="">
                                         </label>
                                     </div><!-- col-2 -->
 

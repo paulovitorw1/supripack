@@ -51,25 +51,33 @@ class ConfiguracaoController extends Controller
         $uploadnameNovo = null;
         if ($request->hasFile('imgEditar')) {
             //pegando o falor que tem na input
-            $image = $request->file('imgEditar')[0];
-            dd($image);
-            //recuperando o nome do arquivo e nomeando com a data atual
-            //Tirando todos os espaços em branco do nome da imagem
-            $uploadnameNovo = str_replace(' ', '', time() . '.' . $image->getClientOriginalExtension());
-            //salvando na pasta /img_carousel
-            //Se a pasta não existir é criado automaticamente 
-            $destinationPath = public_path('/img_carousel');
-            //MOVENDO A IMAGEM PARA DENTRO DA PASTA
-            $image->move($destinationPath, $uploadnameNovo);
-        }
-        if ($uploadnameNovo != null) {
-            foreach ($image as $ssfff) {
-                dd($ssfff->getClientOriginalName());
-                $editarImg = Carousel::find($request->idImgEditar);
-                $editarImg->imagem = $uploadnameNovo;
-                $editarImg->update();
+            $asssss = array(
+                'img' => $image = $request->file('imgEditar'),
+                'id' => $request->idImgEditar
+            );
+            // dd($asssss);
+            $image = $request->file('imgEditar');
+            for ($i = 0; $i < count($asssss['id']); $i++) {
+                while (current($image)) {
+                    $dddd = key($image);
+                    //recuperando o nome do arquivo e nomeando com a data atual
+                    //Tirando todos os espaços em branco do nome da imagem
+                    $uploadnameNovo = str_replace(' ', '', time() . '.' . $image[$dddd]->getClientOriginalExtension());
+                    //salvando na pasta /img_carousel
+                    //Se a pasta não existir é criado automaticamente 
+                    $destinationPath = public_path('/img_carousel');
+                    //MOVENDO A IMAGEM PARA DENTRO DA PASTA
+                    $image[$dddd]->move($destinationPath, $uploadnameNovo);
+                    $editarImg = Carousel::find($asssss['id'][$i]);
+                    $editarImg->imagem = $uploadnameNovo;
+                    $editarImg->update();
+                    next($image);
+                }
             }
         }
+
+
+
 
         // dd($editarImg);
     }

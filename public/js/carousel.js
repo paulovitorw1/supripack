@@ -1,3 +1,4 @@
+var testesss = [];
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -86,6 +87,7 @@ function editarCarousel() {
 $(function () {
     $(document).on("change", ".uploadFile", function () {
         var uploadFile = $(this);
+        // console.log(uploadFile);
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
@@ -96,6 +98,10 @@ $(function () {
             reader.onloadend = function () { // set image data as background of div
                 //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
                 uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
+                uploadFile.closest(".btnUploadEdit").find('.valorIdImg').val(uploadFile[0].defaultValue).removeClass('deletInput');
+
+                // testesss.push();
+
             }
         }
 
@@ -104,6 +110,8 @@ $(function () {
 
 $("#btnformEditar").click(function (e) {
     e.preventDefault();
+    $(".deletInput").remove();
+    console.log(testesss);
     $.ajax({
         type: "POST",
         url: "/admin/config/carousel/editar",
