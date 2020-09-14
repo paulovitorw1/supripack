@@ -23,8 +23,12 @@ Route::group(['prefix' => 'usuario'], function () {
 //
 Route::group(['prefix' => 'admin/config'], function () {
     Route::get('/', 'ConfiguracaoController@indexConfiguracao')->name("ssss");
+    //****************************CONFIGURAÇÃO PARA O SLIDE*************************************\\
     Route::get('/carousel', 'ConfiguracaoController@carousel')->name("view");
     Route::any('/carousel/adicinar', 'ConfiguracaoController@carouselAdd')->name("adicionarImgCarousel");
     Route::post('/carousel/editar', 'ConfiguracaoController@editarCarousel')->name("editarCarousel");
+    Route::post('/carousel/delete', 'ConfiguracaoController@deleteCarousel')->name("deleteCarousel");
+    //***********************CONFIGURAÇÃO PARA O CARDS DESTAQUE*******************************\\
+    Route::get('/produto/destaque', 'ConfiguracaoController@cardsDestaque')->name('viewCardsDEstaque');
 });
 Auth::routes();

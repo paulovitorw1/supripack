@@ -20,8 +20,8 @@
                                 <div id="sportswear" class="panel-collapse collapse layout-supri">
                                     <div class="panel-body">
                                         <ul>
-                                            <li class="lcarousel"><a class="lcarousel" href="">carousel</a></li>
-                                            <li><a href="">Under Armour </a></li>
+                                            <li class="lcarousel"><a class="lcarousel" href="/admin/config/carousel">carousel</a></li>
+                                            <li class="lcardsDestaque"><a class="lcardsDestaque" href="/admin/config/produto/destaque">Produtos destaque</a></li>
                                             <li><a href="">Adidas </a></li>
                                             <li><a href="">Puma</a></li>
                                             <li><a href="">ASICS </a></li>

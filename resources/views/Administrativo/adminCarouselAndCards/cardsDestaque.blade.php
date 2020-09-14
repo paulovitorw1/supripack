@@ -247,23 +247,13 @@
     {{-- FIM MODEL EDIT CAROUSEL --}}
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/config.css') }}">
-    <link href="{{ asset('libs/input-file/css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link href="{{ asset('libs/input-file/themes/explorer-fas/theme.css') }}" media="all" rel="stylesheet"
-        type="text/css" />
 
 
 @endsection
 @section('js')
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous">
-    </script> --}}
-    <script src="{{ asset('js/configuracao/carousel.js') }}"></script>
-    <script src="{{ asset('libs/input-file/js/plugins/piexif.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('libs/input-file/js/plugins/sortable.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('libs/input-file/js/fileinput.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('libs/input-file/js/locales/pt-BR.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('libs/input-file/themes/fas/theme.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('libs/input-file/themes/explorer-fas/theme.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('js/configuracao/cardsDestaque.js') }}"></script>
+
 
 @endsection
 

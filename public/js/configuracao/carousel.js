@@ -1,4 +1,6 @@
 var testesss = [];
+var idDelete = [];
+var idDeleteunique = [];
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -9,7 +11,7 @@ $(document).ready(function () {
     $(".layout-supri").removeClass('collapse');
     $(".layout-supri").addClass('in');
     $(".layout-supri").css('height', 'auto');
-    $(".lcarousel").addClass('linkcarousel');
+    $(".lcarousel").addClass('linkselectedConfig');
     $("#test-upload").fileinput({
         'theme': 'fas',
         'showPreview': false,
@@ -70,19 +72,11 @@ $(document).ready(function () {
     });
 
 });
-
-function addItemcarousel() {
-    $("#kv-explorer").fileinput('clear');
-    $("#modalAddItemCarousel").modal('show');
-
+function reloadPagina() {
+    setInterval(() => {
+        location.reload();
+    }, 2000);
 }
-
-function editarCarousel() {
-    $("#modalEditItemCarousel").modal('show');
-
-}
-
-
 //Imagem
 $(function () {
     $(document).on("change", ".uploadFile", function () {
@@ -107,11 +101,88 @@ $(function () {
 
     });
 });
+//CHAMANDO MODAL PARA ADD
+function addItemcarousel() {
+    //LIMPANDO O MODAL, FUNÇÃO DA BIBLIOTECA KRAJEE
+    $("#kv-explorer").fileinput('clear');
+    $("#modalAddItemCarousel").modal('show');
 
+}
+//CHAMANDO MODAL EDIT
+function editarCarousel() {
+    $("#modalEditItemCarousel").modal('show');
+
+}
+//Chamando MODAL DELETE
+function deleteCarousel() {
+    $("#modalApagarItemCarousel").modal('show');
+
+}
+
+function deletar(idCardImg) {
+    Swal.fire({
+        position: 'top',
+        title: 'Você tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, apague-o!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //adicinando o id dentro de um array ser enviado
+            idDelete.push(idCardImg);
+            //removendo o card
+            $('.card_' + idCardImg).remove();
+            //Alert sucesso
+            Swal.fire(
+                'Deletado!',
+                'Seu arquivo foi excluído.',
+                'success'
+            );
+        }
+    });
+
+
+
+}
+//Enviando os IDs para deletar cards do carousel
+$("#btnformDelte").on('click', function (e) {
+    e.preventDefault();
+    //Removendo itens duplicados do array
+    function idUnico(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+    //
+    idDeleteunique = idDelete.filter(idUnico);
+    $.ajax({
+        type: "POST",
+        url: "/admin/config/carousel/delete",
+        data: {
+            idDelete: idDeleteunique
+        },
+        dataType: "JSON",
+        success: function (data) {
+            Swal.fire({
+                icon: 'success',
+                position: 'top',
+                title: 'Dados deletados com sucesso!',
+                text: 'Os dados selecionados foram apagados com sucesso.'
+            });
+            reloadPagina();
+        }, error: function (erros) {
+            alert("deu erro");
+
+        }
+    });
+
+});
+//Enviando formulario para edição
 $("#btnformEditar").click(function (e) {
     e.preventDefault();
+    //removendo inputs que não foram editadas
     $(".deletInput").remove();
-    console.log(testesss);
     $.ajax({
         type: "POST",
         url: "/admin/config/carousel/editar",
@@ -120,6 +191,14 @@ $("#btnformEditar").click(function (e) {
         contentType: false,
         success: function (data) {
             console.log(data);
+            Swal.fire({
+                icon: 'success',
+                position: 'top',
+                title: 'Dados Atualizados com sucesso !',
+                text: 'sssss'
+            });
+            //recarregando a pagina
+            reloadPagina();
         },
         error: function (erros) {
             console.log(erros);
@@ -128,21 +207,3 @@ $("#btnformEditar").click(function (e) {
     });
 });
 
-
-// $("#btnform").on('click', function (e) {
-//     e.preventDefault();
-
-//     $.ajax({
-//         type: "POST",
-//         url: "/admin/config/carousel/adicinar",
-//         data: new FormData($("#ttttttt form")[0]),
-//         processData: false,
-//         contentType: false,
-//         success: function (data) {
-//             console.log(data);
-//         },
-//         error: function (erros) {
-
-//         }
-//     });
-// });
