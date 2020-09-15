@@ -72,6 +72,9 @@
     margin-left: 0px;
 
 }
+.modal-header .close {
+    margin-top: -18px;
+}
 
 /* .del {
     position: absolute;

@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin/config'], function () {
     Route::post('/carousel/editar', 'ConfiguracaoController@editarCarousel')->name("editarCarousel");
     Route::post('/carousel/delete', 'ConfiguracaoController@deleteCarousel')->name("deleteCarousel");
     //***********************CONFIGURAÇÃO PARA O CARDS DESTAQUE*******************************\\
-    Route::get('/produto/destaque', 'ConfiguracaoController@cardsDestaque')->name('viewCardsDEstaque');
+    Route::get('/produto/destaque', 'ConfiguracaoController@viewProdutoDestaque')->name('viewCardsDEstaque');
+
+    Route::post('/produto/destaque/visualizar', 'ConfiguracaoController@viewProduto')->name('asdsadsa');
 });
 Auth::routes();

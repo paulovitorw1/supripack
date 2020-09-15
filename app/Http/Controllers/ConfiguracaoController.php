@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ConfiguracaoController extends Controller
 {
@@ -100,12 +102,33 @@ class ConfiguracaoController extends Controller
     }
 
     //********************************************************************************************************//
-    //**************************FUNÇÕES PARA OS CARDS DE DESTAQUE*********************************************//
+    //**************************FUNÇÕES PARA OS PRODUTOS DE DESTAQUE*********************************************//
     //********************************************************************************************************//
-    public function cardsDestaque()
+    public function viewProdutoDestaque(Request $request)
     {
         //Consulta img para carousel tela de config
-        $consultaImagemCarusel = DB::select('SELECT * FROM e_carousel WHERE e_carousel.status = 1');
-        return view('Administrativo.adminCarouselAndCards/cardsDestaque', compact('consultaImagemCarusel'));
+        $consultaProduto = DB::select('SELECT * FROM produtos WHERE produtos.instit = 2');
+
+        if ($request->ajax()) {
+            return DataTables::of($consultaProduto)
+                ->addColumn('action', function ($consultaProduto) {
+                    return
+                        '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                        '<input type="checkbox" class="checkbox"/>'
+                        // '<button onclick="redirecEditarPessoa()" class="btn btn-warning btn-acoes"><i class="fas fa-edit"></i></i></button>' .
+                        // '<button onclick="deletarPessoa()" class="btn btn-danger btn-acoes"><i class="fas fa-trash-alt"></i></button>'
+                    ;
+                })->make(true);
+        }
+        return view('Administrativo.adminCarouselAndCards/cardsDestaque', compact('consultaProduto'));
+    }
+    public function viewProduto(Request $request)
+    {
+        $idproduto = $request->idProduto;
+
+        //Consulta img para carousel tela de config
+        $consultaProdutoID = DB::select('SELECT * FROM produtos WHERE produtos.instit = 2 AND produtos.id = ?', [$idproduto]);
+
+        return response()->json($consultaProdutoID);
     }
 }
