@@ -1,4 +1,5 @@
 var table;
+var htmlImg = '';
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -63,6 +64,7 @@ function reloadPagina() {
 }
 
 function viewProduto(idProduto) {
+    $('.containerImgProduto').empty();
     $.ajax({
         type: "POST",
         url: "/admin/config/produto/destaque/visualizar",
@@ -74,7 +76,21 @@ function viewProduto(idProduto) {
         },
         dataType: "JSON",
         success: function (data) {
-            console.log(data);
+            $.each(data, function (indexInArray, valueOfElement) {
+                console.log(indexInArray);
+
+                htmlImg += '<div class="col-sm-4 imgUp card"><div class="imagePreview" style="background-image: url(http://192.168.15.127:8000/images/' + valueOfElement.nome_arquivo + ')"></div> <button onclick="" type="button" name="imgDelete[]" value="" class="btn btn-danger btnUploadEdit btnDelete"> Deletar </button></div>';
+            });
+            $("#formViewProduto .viewProduto").each(function () {
+                $(this).attr("readonly", true);
+                $(this).attr("disabled", true);
+                
+            });
+            $('.containerImgProduto').html(htmlImg);
+            $("#nomeproduto").val(data[0].nome);
+            $("#gruoproduto").val(data[0].nv3);
+            $("#descProduto").val(data[0].descr);
+
             $("#modalViewProduto").modal('show');
 
         }, error: function (erros) {

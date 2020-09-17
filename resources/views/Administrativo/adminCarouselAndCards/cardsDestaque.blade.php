@@ -41,57 +41,55 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Visualizar Produto</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                <div class="modal-body bodymodal-viewProduto">
+                    <div class="container-fluid " style="margin-top: 2%;">
+                        <div class="row rowPreviwEdit containerImgProduto">
+
+                        </div>
+                    </div><!-- container -->
+                    {{-- <div class="container"> --}}
+                        <form id="formViewProduto" enctype="multipart/form-data" method="POST">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="nomeproduto">Nome do Produto:</label>
+                                    <input type="text" name="nomeproduto" id="nomeproduto" class="form-control viewProduto">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="gruoproduto">Grupo do produto:</label>
+                                    <input type="text" name="gruoproduto" id="gruoproduto" class="form-control viewProduto">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label for="message-text" class="col-form-label">Descrição do produto:</label>
+                                    <textarea class="form-control viewProduto" id="descProduto"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        {{-- </div> --}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button>
+                    --}}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/config.css') }}">
     <link rel="stylesheet" href="{{ asset('libs/DataTables/datatables.min.css') }}">
-
-
-
 @endsection
 @section('js')
-
     <script src="{{ asset('js/configuracao/cardsDestaque.js') }}"></script>
-
     <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
-
-
-
 @endsection
 
 @endsection

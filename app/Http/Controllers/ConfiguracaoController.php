@@ -127,8 +127,7 @@ class ConfiguracaoController extends Controller
         $idproduto = $request->idProduto;
 
         //Consulta img para carousel tela de config
-        $consultaProdutoID = DB::select('SELECT * FROM produtos WHERE produtos.instit = 2 AND produtos.id = ?', [$idproduto]);
-
+        $consultaProdutoID = DB::select('SELECT * FROM produtos INNER JOIN prod_grp ON prod_grp.id = produtos.grupo INNER JOIN fotos ON fotos.id_produto = produtos.id WHERE produtos.id = 127', [$idproduto]);
         return response()->json($consultaProdutoID);
     }
 }
