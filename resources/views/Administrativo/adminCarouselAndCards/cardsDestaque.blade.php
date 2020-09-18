@@ -3,7 +3,47 @@
     <div class="product-details">
         <!--product-details-->
         <div class="col-sm-12">
-            <h3>Registro de produtos</h3>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <div class="form-row " id="grup_tableInputs">
+                        <div class="left-sidebar">
+                            <h2>Configuração</h2>
+
+                        </div>
+                        {{-- <div class="form-group col-md-4 " id="divSelectTipo">
+                            <label for="nomePessoa">Nome:</label>
+                            <select class="form-control" name="valorTipoPessoa" id="selectTipo">
+                                <option value="1">Todos</option>
+                                <option value="2">Pessoa Física</option>
+                                <option value="3">Pessoa Jurídico</option>
+                            </select>
+                        </div> --}}
+                        <div class="form-group col-md-3" id="divinputPesquisa">
+                            <button onclick="addDestaque();" id="btnAddDestaque" class="btn btn-primary" title="teste">
+                                teste
+                            </button>
+                            <label for="pesquisa">Pesquisa:</label>
+                            <input type="search" class="form-control" id="inputPesquisa">
+
+                        </div>
+                    </div>
+                    <table class="table table-bordered" id="tableCards" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            {{-- <h3>Registro de produtos</h3>
             <hr>
             <table id="tableCards" class="table table-bordered">
                 <thead>
@@ -12,6 +52,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Last</th>
                         <th scope="col">Handle</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Ações</th>
 
                     </tr>
@@ -21,7 +62,7 @@
 
                 </tbody>
 
-            </table>
+            </table> --}}
         </div>
     </div>
     {{-- <div class="form-row">

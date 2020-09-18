@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\ProdutoDestaque;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -107,14 +108,14 @@ class ConfiguracaoController extends Controller
     public function viewProdutoDestaque(Request $request)
     {
         //Consulta img para carousel tela de config
-        $consultaProduto = DB::select('SELECT * FROM produtos WHERE produtos.instit = 2');
+        $consultaProduto = DB::select('SELECT * FROM produtos  WHERE produtos.instit = 2');
 
         if ($request->ajax()) {
             return DataTables::of($consultaProduto)
                 ->addColumn('action', function ($consultaProduto) {
                     return
                         '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                        '<input type="checkbox" class="checkbox"/>'
+                        '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '"/>'
                         // '<button onclick="redirecEditarPessoa()" class="btn btn-warning btn-acoes"><i class="fas fa-edit"></i></i></button>' .
                         // '<button onclick="deletarPessoa()" class="btn btn-danger btn-acoes"><i class="fas fa-trash-alt"></i></button>'
                     ;
@@ -127,7 +128,18 @@ class ConfiguracaoController extends Controller
         $idproduto = $request->idProduto;
 
         //Consulta img para carousel tela de config
-        $consultaProdutoID = DB::select('SELECT * FROM produtos INNER JOIN prod_grp ON prod_grp.id = produtos.grupo INNER JOIN fotos ON fotos.id_produto = produtos.id WHERE produtos.id = 127', [$idproduto]);
+        $consultaProdutoID = DB::select('SELECT * FROM produtos INNER JOIN prod_grp ON prod_grp.id = produtos.grupo INNER JOIN fotos ON fotos.id_produto = produtos.id INNER JOIN e_produto_destaque ON e_produto_destaque.id_produto_fk = produtos.id WHERE produtos.id = 127', [$idproduto]);
         return response()->json($consultaProdutoID);
+    }
+    public function addDestaque(Request $request)
+    {
+        $idNovoDestaque = $request->chklistaPdestaque;
+        foreach ($idNovoDestaque as $id) {
+            $addDestaque = ProdutoDestaque::create([
+                'id_produto_fk' => $id,
+                'status' => 1
+            ]);
+        }
+        return response()->json($addDestaque);
     }
 }

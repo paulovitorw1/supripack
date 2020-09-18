@@ -72,13 +72,34 @@
     margin-left: 0px;
 
 }
+
+/* */
 .modal-header .close {
     margin-top: -18px;
 }
 
-.bodymodal-viewProduto{
+.bodymodal-viewProduto {
     padding: 0%;
 }
+
+#tableCards_filter {
+    display: none !important;
+}
+
+#divinputPesquisa {
+    float: right;
+    padding-right: 0;
+}
+
+#divSelectTipo {
+    padding-left: 0;
+}
+
+#btnAddDestaque {
+    float: right;
+    margin-top: -15%;
+}
+
 /* .del {
     position: absolute;
     top: 0px;

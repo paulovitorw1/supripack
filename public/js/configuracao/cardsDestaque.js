@@ -1,5 +1,6 @@
 var table;
 var htmlImg = '';
+var chklistaPdestaque;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -26,6 +27,7 @@ $(document).ready(function () {
             { data: 'nome' },
             { data: 'id' },
             { data: 'id' },
+            { data: 'ativo' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
 
         ],
@@ -56,14 +58,36 @@ $(document).ready(function () {
 
     });
 
+    //substituindo a input de pesquisa do DataTables
+    $('#inputPesquisa').on('keyup', function () {
+        table.search(this.value).draw();
+    });
 });
 function reloadPagina() {
     setInterval(() => {
         location.reload();
     }, 2000);
 }
+function addDestaque() {
+    //Pegando os IDs dos produto selecionados para enviar para o controller via ajax
+    chklistaPdestaque = $('input[name="checkboxDestaque"]:checked').toArray().map(function (check) {
+        return $(check).val();
+    });
+    $.ajax({
+        type: "POST",
+        url: "/admin/config/produto/destaque/addDestaque",
+        data: {
+            chklistaPdestaque: chklistaPdestaque
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "JSON",
+    })
 
+}
 function viewProduto(idProduto) {
+    htmlImg = '';
     $('.containerImgProduto').empty();
     $.ajax({
         type: "POST",
@@ -84,7 +108,7 @@ function viewProduto(idProduto) {
             $("#formViewProduto .viewProduto").each(function () {
                 $(this).attr("readonly", true);
                 $(this).attr("disabled", true);
-                
+
             });
             $('.containerImgProduto').html(htmlImg);
             $("#nomeproduto").val(data[0].nome);

@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin/config'], function () {
     //***********************CONFIGURAÇÃO PARA O CARDS DESTAQUE*******************************\\
     Route::get('/produto/destaque', 'ConfiguracaoController@viewProdutoDestaque')->name('viewCardsDEstaque');
 
-    Route::post('/produto/destaque/visualizar', 'ConfiguracaoController@viewProduto')->name('asdsadsa');
+    Route::post('/produto/destaque/visualizar', 'ConfiguracaoController@viewProduto')->name('viewProduto');
+    Route::post('/produto/destaque/addDestaque', 'ConfiguracaoController@addDestaque')->name('addDestaque');
 });
 Auth::routes();
