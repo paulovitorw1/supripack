@@ -14,8 +14,12 @@
 Route::get('/', function () {
     return redirect('/inicial');
 });
+Route::group(['prefix' => 'inicial'], function () {
+    Route::get('/', 'PainelInicialController@indexInicialView')->name('viewInicial');
+    Route::get('/slide', 'PainelInicialController@indexSlide')->name('indexSlide');
+
+});
 //Tela Inicial
-Route::get('/inicial', 'PainelInicialController@indexInicialView')->name('viewInicial');
 //
 Route::group(['prefix' => 'usuario'], function () {
     Route::post('/adicinar', 'CadastroUsuarioController@cadastroUser')->name("cadastroUser");

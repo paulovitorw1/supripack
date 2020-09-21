@@ -109,16 +109,19 @@ class ConfiguracaoController extends Controller
     {
         //Consulta img para carousel tela de config
         $consultaProduto = DB::select('SELECT * FROM produtos  WHERE produtos.instit = 2');
-
+        // dd();
         if ($request->ajax()) {
             return DataTables::of($consultaProduto)
                 ->addColumn('action', function ($consultaProduto) {
-                    return
-                        '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                        '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '"/>'
-                        // '<button onclick="redirecEditarPessoa()" class="btn btn-warning btn-acoes"><i class="fas fa-edit"></i></i></button>' .
-                        // '<button onclick="deletarPessoa()" class="btn btn-danger btn-acoes"><i class="fas fa-trash-alt"></i></button>'
-                    ;
+                    if ($consultaProduto->status_destaque == 1) {
+                        return
+                            '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                            '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '" checked />';
+                    } else {
+                        return
+                            '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                            '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '" />';
+                    }
                 })->make(true);
         }
         return view('Administrativo.adminCarouselAndCards/cardsDestaque', compact('consultaProduto'));
@@ -135,10 +138,9 @@ class ConfiguracaoController extends Controller
     {
         $idNovoDestaque = $request->chklistaPdestaque;
         foreach ($idNovoDestaque as $id) {
-            $addDestaque = ProdutoDestaque::create([
-                'id_produto_fk' => $id,
-                'status' => 1
-            ]);
+            $addDestaque = ProdutoDestaque::find($id);
+            $addDestaque->status_destaque = 1;
+            $addDestaque->update();
         }
         return response()->json($addDestaque);
     }

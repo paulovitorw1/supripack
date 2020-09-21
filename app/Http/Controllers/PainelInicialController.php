@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PainelInicialController extends Controller
 {
@@ -12,7 +13,13 @@ class PainelInicialController extends Controller
         return view('Cliente.PaginaInicial/cardsEslide');
     }
     //
-    public function indexSlide()
+    public function indexSlide(Request $request)
     {
+        //Consulta img para carousel tela de config
+        $consultaImagemCarusel = DB::select('SELECT * FROM e_carousel WHERE e_carousel.status = 1');
+        // if ($request->ajax()) {
+        // }
+        // return view();
+        return response()->json($consultaImagemCarusel);
     }
 }

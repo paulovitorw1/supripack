@@ -6,43 +6,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="0"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1" class="1"></li>
+                        <ol class="carousel-indicators ol_li">
+ 
 
                         </ol>
 
-                        <div class="carousel-inner">
-                            <div class="item active">
-
-                                {{-- <div class="col-sm-12"> --}}
-                                    {{-- <h1><span>E</span>-SUPRIPACK</h1>
-                                    <h2>TESTE</h2> --}}
-                                    {{-- <p>Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut
-                                        labore et dolore magna aliqua. </p> --}}
-                                    {{-- <button type="button" class="btn btn-default get">Get
-                                        it
-                                        now</button> --}}
-                                    {{--
-                                </div> --}}
-                                <div class="col-sm-12">
-
-                                    <img src="{{ asset('img/home/girl1.jpg') }}" class="girl img-responsive" alt="">
-                                </div>
-                            </div>
-                            {{-- @foreach ($consultaImagemCarusel as $item) --}}
-                                <div class="item next">
-
-                                    <div class="col-sm-12">
-                                        <img src="{{ asset('img/home/recommend1.jpg') }}" class="girl img-responsive"
-                                            alt="">
-                                    </div>
-                                </div>
-                                {{-- @endforeach
-                            --}}
-
+                        <div class="carousel-inner itemProximoImg">
+  
 
                         </div>
 
@@ -805,6 +775,10 @@
     </section>
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/config.css') }}">
+
+@endsection
+@section('js')
+    <script src="{{ asset('js/cliente/slide-produtoDestaque.js') }}"></script>
 
 @endsection
 @endsection

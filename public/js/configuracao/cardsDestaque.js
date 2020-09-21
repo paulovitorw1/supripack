@@ -73,21 +73,33 @@ function addDestaque() {
     chklistaPdestaque = $('input[name="checkboxDestaque"]:checked').toArray().map(function (check) {
         return $(check).val();
     });
-    $.ajax({
-        type: "POST",
-        url: "/admin/config/produto/destaque/addDestaque",
-        data: {
-            chklistaPdestaque: chklistaPdestaque
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: "JSON",
-    })
+    if (chklistaPdestaque == '') {
+        alert("error");
+    } else {
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/config/produto/destaque/addDestaque",
+            data: {
+                chklistaPdestaque: chklistaPdestaque
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "JSON",
+            success: function (data) {
+
+            }, error: function (erros) {
+
+            }
+        });
+    }
 
 }
+//Visualizando o produto
 function viewProduto(idProduto) {
     htmlImg = '';
+    //limpando a div do modal
     $('.containerImgProduto').empty();
     $.ajax({
         type: "POST",
@@ -100,6 +112,7 @@ function viewProduto(idProduto) {
         },
         dataType: "JSON",
         success: function (data) {
+            //Criando os cards de imagens
             $.each(data, function (indexInArray, valueOfElement) {
                 console.log(indexInArray);
 
@@ -110,11 +123,13 @@ function viewProduto(idProduto) {
                 $(this).attr("disabled", true);
 
             });
+            //adicionando os cards na div
             $('.containerImgProduto').html(htmlImg);
+            //DADOS DO PRODUTO
             $("#nomeproduto").val(data[0].nome);
             $("#gruoproduto").val(data[0].nv3);
             $("#descProduto").val(data[0].descr);
-
+            //abrindo o modal
             $("#modalViewProduto").modal('show');
 
         }, error: function (erros) {
