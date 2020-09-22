@@ -1,6 +1,8 @@
 var table;
 var htmlImg = '';
 var chklistaPdestaque;
+var checkListDelete = [];
+var htmlInputCheck = '';
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -20,6 +22,13 @@ $(document).ready(function () {
         "order": [[0, "asc"]],
         dom: 'Bfrtip',
         ajax: "/admin/config/produto/destaque",
+        "columnDefs": [{
+            "targets": 5,
+            "createdCell": function (td, cellData, rowData, row, col) {
+                $(td).addClass("deleteCheck_" + rowData.id);
+            }
+        }]
+        ,
         //Fazendo a listagem dos seguintes dados
         columns: [
             //LISTANDO OS DOIS TIPO DE PESSOA.
@@ -62,17 +71,71 @@ $(document).ready(function () {
     $('#inputPesquisa').on('keyup', function () {
         table.search(this.value).draw();
     });
+
+
+});
+$('#ssssss').on('click', function (e) {
+    e.preventDefault();
+    console.log($(this).val());
+
+
 });
 function reloadPagina() {
     setInterval(() => {
         location.reload();
     }, 2000);
 }
+//Deletando o produto em destaque
+function deleteDestaque(idProdutoDest) {
+    //PASSANDO O ID DO PRODUTO SELECIONADO VIA AJAX 
+    $.ajax({
+        type: "POST",
+        url: "/admin/config/produto/destaque/delete",
+        data: {
+            idProdutoDest: idProdutoDest
+        },
+        dataType: "JSON",
+        success: function (data) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((data) => {
+                if (data.isConfirmed) {
+                    //VARIAVEL PARA ARMAZENAR A INPUT CHECKBOX
+                    htmlInputCheck = '';
+                    //REMOVENDO O BOTÃO DE DELETE
+                    $(".btn_" + idProdutoDest).remove();
+                    //ADICIONANDO INPUT CHECKBOX
+                    htmlInputCheck += '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' + idProdutoDest + '" />';
+                    $('.deleteCheck_' + idProdutoDest).append(htmlInputCheck);
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }, error: function (erross) {
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'error'
+            )
+        }
+    });
+
+}
 function addDestaque() {
     //Pegando os IDs dos produto selecionados para enviar para o controller via ajax
     chklistaPdestaque = $('input[name="checkboxDestaque"]:checked').toArray().map(function (check) {
         return $(check).val();
     });
+
     if (chklistaPdestaque == '') {
         alert("error");
     } else {
@@ -88,9 +151,19 @@ function addDestaque() {
             },
             dataType: "JSON",
             success: function (data) {
-
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso',
+                    text: 'Produtos cadastrado em destque!',
+                    time: 1500
+                });
+                reloadPagina();
             }, error: function (erros) {
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    // text: 'Produtos cadastrado em destque!',
+                });
             }
         });
     }

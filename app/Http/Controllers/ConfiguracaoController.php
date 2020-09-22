@@ -103,24 +103,25 @@ class ConfiguracaoController extends Controller
     }
 
     //********************************************************************************************************//
-    //**************************FUNÇÕES PARA OS PRODUTOS DE DESTAQUE*********************************************//
+    //****************************FUNÇÕES PARA OS PRODUTOS DE DESTAQUE****************************************//
     //********************************************************************************************************//
     public function viewProdutoDestaque(Request $request)
     {
         //Consulta img para carousel tela de config
         $consultaProduto = DB::select('SELECT * FROM produtos  WHERE produtos.instit = 2');
-        // dd();
         if ($request->ajax()) {
             return DataTables::of($consultaProduto)
                 ->addColumn('action', function ($consultaProduto) {
                     if ($consultaProduto->status_destaque == 1) {
                         return
                             '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                            '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '" checked />';
+                            // <i class="fas fa-minus-circle"></i>
+                            '<button onclick="deleteDestaque(' . $consultaProduto->id . ')" class="btn btn-danger btn-acoes btn_' . $consultaProduto->id . '" title="excluir produto em destaque"><i class="fas fa-minus-circle"></i></button>';
+                        // '<input type="checkbox" class="checkbox tesasdate" id="ssssss" name="checkboxDestaque[]" value="' . $consultaProduto->id . '" checked />';
                     } else {
                         return
                             '<button onclick="viewProduto(' . $consultaProduto->id . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                            '<input type="checkbox" class="checkbox" name="checkboxDestaque" value="' . $consultaProduto->id . '" />';
+                            '<input type="checkbox" class="checkbox " name="checkboxDestaque" value="' . $consultaProduto->id . '" />';
                     }
                 })->make(true);
         }
@@ -130,18 +131,32 @@ class ConfiguracaoController extends Controller
     {
         $idproduto = $request->idProduto;
 
-        //Consulta img para carousel tela de config
+        //Consultando produto 
         $consultaProdutoID = DB::select('SELECT * FROM produtos INNER JOIN prod_grp ON prod_grp.id = produtos.grupo INNER JOIN fotos ON fotos.id_produto = produtos.id INNER JOIN e_produto_destaque ON e_produto_destaque.id_produto_fk = produtos.id WHERE produtos.id = 127', [$idproduto]);
         return response()->json($consultaProdutoID);
     }
+    //Adicionando produto em destaque
     public function addDestaque(Request $request)
     {
+        //recebendo 1 ou mais de 1 ID
         $idNovoDestaque = $request->chklistaPdestaque;
+        //laço para percorrer todos os IDs e atualizar a coluna status_destaque
         foreach ($idNovoDestaque as $id) {
             $addDestaque = ProdutoDestaque::find($id);
             $addDestaque->status_destaque = 1;
             $addDestaque->update();
         }
         return response()->json($addDestaque);
+    }
+    //Deletando produtos em destaque
+    public function deleteDestaque(Request $request)
+    {
+        //recebendo o ID do produto
+        $idProduto = $request->idProdutoDest;
+        //pegar o produto e a atulizar seu status para 0
+        $deleteProdutoDestaque = ProdutoDestaque::find($idProduto);
+        $deleteProdutoDestaque->status_destaque = 0;
+        $deleteProdutoDestaque->update();
+        return response()->json($deleteProdutoDestaque);
     }
 }

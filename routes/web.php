@@ -17,7 +17,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'inicial'], function () {
     Route::get('/', 'PainelInicialController@indexInicialView')->name('viewInicial');
     Route::get('/slide', 'PainelInicialController@indexSlide')->name('indexSlide');
-
 });
 //Tela Inicial
 //
@@ -37,5 +36,6 @@ Route::group(['prefix' => 'admin/config'], function () {
 
     Route::post('/produto/destaque/visualizar', 'ConfiguracaoController@viewProduto')->name('viewProduto');
     Route::post('/produto/destaque/addDestaque', 'ConfiguracaoController@addDestaque')->name('addDestaque');
+    Route::post('/produto/destaque/delete', 'ConfiguracaoController@deleteDestaque')->name("deleteDestaque");
 });
 Auth::routes();

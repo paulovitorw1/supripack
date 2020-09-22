@@ -21,7 +21,7 @@
                         </div> --}}
                         <div class="form-group col-md-3" id="divinputPesquisa">
                             <button onclick="addDestaque();" id="btnAddDestaque" class="btn btn-primary" title="teste">
-                                teste
+                                Salvar
                             </button>
                             <label for="pesquisa">Pesquisa:</label>
                             <input type="search" class="form-control" id="inputPesquisa">
