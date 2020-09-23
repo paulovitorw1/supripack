@@ -22,4 +22,9 @@ class PainelInicialController extends Controller
         // return view();
         return response()->json($consultaImagemCarusel);
     }
+    public function indexProdutoDestaque()
+    {
+        $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
+        return response()->json($consultaProdutoDestaque);
+    }
 }

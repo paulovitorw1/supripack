@@ -17,7 +17,9 @@
     <link href="{{ asset('libs/bootstrap/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('libs/bootstrap/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('libs/sweetalert2/dist/sweetalert2.all.min.css') }}" rel="stylesheet"> --}}
+    {{--
+    <link href="{{ asset('libs/sweetalert2/dist/sweetalert2.all.min.css') }}" rel="stylesheet">
+    --}}
 
     @yield('css')
     <!--[if lt IE 9]>
@@ -78,7 +80,7 @@
                                 <li class="dropdown"><a href="#"><i class="fa fa-user"></i>Shop<i
                                             class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="/admin/config/cadastro/carousel">Config</a></li>
+                                        <li><a href="/admin/config/carousel">Config</a></li>
                                         <li><a href="product-details.html">Product Details</a></li>
 
                                     </ul>

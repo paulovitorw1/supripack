@@ -43,6 +43,8 @@
                     </table>
                 </div>
             </div>
+
+
             {{-- <h3>Registro de produtos</h3>
             <hr>
             <table id="tableCards" class="table table-bordered">

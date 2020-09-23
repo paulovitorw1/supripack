@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'inicial'], function () {
     Route::get('/', 'PainelInicialController@indexInicialView')->name('viewInicial');
     Route::get('/slide', 'PainelInicialController@indexSlide')->name('indexSlide');
+    Route::get('/produto/destaque', 'PainelInicialController@indexProdutoDestaque')->name('indexProdutoDestaque');
 });
 //Tela Inicial
 //

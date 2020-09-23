@@ -6,6 +6,7 @@
     background: transparent !important;
 
 }
+
 .navbar-nav li ul.sub-menu li a:hover {
     color: #000000;
 }
@@ -28,16 +29,13 @@
     margin-bottom: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
 .col-md-6 {
     width: 54%;
+}
+
+.cardProduto {
+    max-width: 100% !important;
+    width: 300px !important;
+    height: 250px !important;
+
 }

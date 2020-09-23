@@ -1,6 +1,6 @@
 .img-responsive {
     max-width: 100% !important;
-    width: 1065px !important;
+    width: 1080px !important;
     height: 310px !important;
 }
 
@@ -73,7 +73,7 @@
 
 }
 
-/* */
+/*  Estilo Modal e table*/
 .modal-header .close {
     margin-top: -18px;
 }
@@ -98,6 +98,23 @@
 #btnAddDestaque {
     float: right;
     margin-top: -15%;
+}
+
+/* estilo carousel index */
+
+.img-responsive-index {
+    max-width: 100% !important;
+    width: 1180px !important;
+    height: 310px !important;
+}
+
+.col_pl-pr-0 {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+.control-carousel {
+    top: 40%;
 }
 
 /* .del {
