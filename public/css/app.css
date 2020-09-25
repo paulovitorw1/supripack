@@ -39,3 +39,7 @@
     height: 250px !important;
 
 }
+
+.cursoPoint {
+    cursor: pointer;
+}
