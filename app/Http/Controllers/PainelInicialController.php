@@ -22,10 +22,13 @@ class PainelInicialController extends Controller
         // return view();
         return response()->json($consultaImagemCarusel);
     }
-    public function indexProdutoDestaque()
+    public function indexProdutoDestaque(Request $request)
     {
+        $pagina = $request->pagina;
+        $quant_pagina = $request->quant_pagina;
+        // dd($quant_pagina);
         $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
-        return response()->json($consultaProdutoDestaque);
+        return $consultaProdutoDestaque;
     }
     public function indexCategoria()
     {

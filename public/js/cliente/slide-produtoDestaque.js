@@ -5,6 +5,11 @@ var htmlCategoria = '';
 var htmlSubMenu = '';
 var textMinu = '';
 var filtroProduto = '';
+
+
+var result = [];
+var tamanhoPagina = 3;
+var pagina = 0;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -42,27 +47,6 @@ function slide() {
     });
 }
 
-function cardProdutoDestaque() {
-    $.ajax({
-        type: "GET",
-        url: "/inicial/produto/destaque",
-        dataType: "JSON",
-        success: function (data) {
-            $.each(data, function (indexInArray, valueOfElement) {
-                htmlCardPDestaque += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + valueOfElement.nome_arquivo + '" alt="" ><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
-                // console.log(valueOfElement.nome_arquivo);
-
-                //ANALIZAR DPS 
-                // <div class="choose"><ul class="nav nav-pills nav-justified"><li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li><li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li></ul></div>
-            });
-            $("#divProdutoDestaque").html(htmlCardPDestaque);
-            // 
-            // https://dev.loja.avantz.com.br/
-        }, error: function (erros) {
-
-        }
-    });
-}
 
 function categoria() {
     $.ajax({
@@ -134,8 +118,27 @@ function categoria() {
     });
 }
 
+//Funão para Produtos em destaque
+function cardProdutoDestaque() {
+    $.ajax({
+        type: "POST",
+        url: "/inicial/produto/destaque",
+        dataType: "JSON",
+        success: function (data) {
+            //Passando os valores para uma variavel global
+            result = data;
+            //execultando as funções para receber os novos valores
+            paginar();
+            ajustarBotoes();
+        }, error: function (erros) {
+
+        }
+    });
+}
+
+//Função para produtos filtrados
 function filtroCategoriaProduto(idCategoria) {
-    filtroProduto = '';
+    htmlCardPDestaque = '';
     $.ajax({
         type: "POST",
         url: "/inicial/filtro/produto",
@@ -144,17 +147,57 @@ function filtroCategoriaProduto(idCategoria) {
         },
         dataType: "JSON",
         success: function (data) {
-            console.log(data);
-            $.each(data, function (indexInArray, valueOfElement) {
-                filtroProduto += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + valueOfElement.nome_arquivo + '" alt="" ><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
-                // console.log(valueOfElement.nome_arquivo);
+            result = data;
+            paginar();
+            ajustarBotoes();
+            // $.each(data, function (indexInArray, valueOfElement) {
+            //     filtroProduto += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + valueOfElement.nome_arquivo + '" alt="" ><h2>' + valueOfElement.id + '</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
+            //     // console.log(valueOfElement.nome_arquivo);
 
-                //ANALIZAR DPS 
-                // <div class="choose"><ul class="nav nav-pills nav-justified"><li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li><li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li></ul></div>
-            });
-            $("#divProdutoDestaque").html(filtroProduto);
+            //     //ANALIZAR DPS 
+            //     // <div class="choose"><ul class="nav nav-pills nav-justified"><li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li><li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li></ul></div>
+            // });
+            // $("#divProdutoDestaque").html(filtroProduto);
         }, error: function (erros) {
 
         }
     });
 }
+
+//Função para popução da DIV
+function paginar() {
+    //limpando a variavel que vai receber o HTML 
+    htmlCardPDestaque = '';
+    //Limpando a DIV que vai receber os produtos
+    $('#divProdutoDestaque').empty();
+
+    for (var i = pagina * tamanhoPagina; i < result.length && i < (pagina + 1) * tamanhoPagina; i++) {
+        //Armazenando os produtos na variavel
+        htmlCardPDestaque += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + result[i].nome_arquivo + '" alt="" ><h2>' + result[i].id + '</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
+
+    }
+    //Populando a DIV
+    $("#divProdutoDestaque").html(htmlCardPDestaque);
+    //Exibir a quantidade de pagina e onde o mesmo se encontra
+    $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(result.length / tamanhoPagina));
+}
+
+function ajustarBotoes() {
+    $('#proximo').prop('disabled', result.length <= tamanhoPagina || pagina >= Math.ceil(result.length / tamanhoPagina) - 1);
+    $('#anterior').prop('disabled', result.length <= tamanhoPagina || pagina == 0);
+}
+
+$('#proximo').click(function () {
+    if (pagina < result.length / tamanhoPagina - 1) {
+        pagina++;
+        paginar();
+        ajustarBotoes();
+    }
+});
+$('#anterior').click(function () {
+    if (pagina > 0) {
+        pagina--;
+        paginar();
+        ajustarBotoes();
+    }
+});
