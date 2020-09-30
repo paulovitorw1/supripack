@@ -21,6 +21,8 @@ Route::group(['prefix' => 'inicial'], function () {
     Route::get('/categoria', 'PainelInicialController@indexCategoria')->name('indexCategoria');
     Route::post('/tesste', 'PainelInicialController@indexCategoriaID')->name('indexCategoriaID');
     Route::post('/filtro/produto', 'PainelInicialController@indexBuscaProdutoCategoria')->name('indexBuscaProdutoCategoria');
+    Route::post('/filtro/produto/pesquisa', 'PainelInicialController@indexPesquisaProduto')->name('indexPesquisaProduto');
+
 });
 //Tela Inicial
 //

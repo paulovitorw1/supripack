@@ -1,5 +1,14 @@
 @extends('Painel.index_painel')
 @section('conteudo')
+    <div class="modal fade in" id="reload" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
+        aria-hidden="false" style="display: block; pointer-events: none;">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <section id="slider">
         <!--slider-->
         <div class="container">
@@ -34,7 +43,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="left-sidebar">
-                        <h2>Category</h2>
+                        <h2>Categoria</h2>
                         <div class="panel-group category-products" id="accordian">
 
 
@@ -46,7 +55,15 @@
                 </div>
 
                 <div class="col-sm-9 padding-right">
-                    <h2 class="title text-center">Features Items</h2>
+                    <h2 class="title text-center" id="h2-produtos"></h2>
+                    <div class="row">
+                        <div class="col-sm-12" style="margin-bottom: 2%;">
+                            <div class="search_box pull-right">
+                                <input type="text" id="inputPesquisa" placeholder="Pesquisar">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="idCategoria" value="">
                     <div class="features_items" id="divProdutoDestaque">
                         <!--Produto em destaque-->
 
@@ -70,8 +87,9 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/cliente/slide-produtoDestaque.js') }}"></script>
-   
-    {{-- <script src="{{ asset('js/cliente/teste.js') }}"></script> --}}
+
+    {{-- <script src="{{ asset('js/cliente/teste.js') }}"></script>
+    --}}
 
 @endsection
 @endsection

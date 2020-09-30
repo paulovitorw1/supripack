@@ -1,25 +1,43 @@
+//Variaveis para o carusel 
 var htmlSlide = '';
 var htmlLiSlide = '';
+//Variavel que vai armazenar os produtos em destaque
 var htmlCardPDestaque = '';
+//Variavel que vai armazenar os menu
 var htmlCategoria = '';
+//Variavel que vai armazenar os sub-menu
 var htmlSubMenu = '';
-var textMinu = '';
 var filtroProduto = '';
 
-
+//Variavel que vai armazenar os produtos
 var result = [];
+//Quantidade de produtos por pagina
 var tamanhoPagina = 3;
+//Pagina atual
 var pagina = 0;
+//Cache de pesquisa
+var cache = {};
+var idCategoriaorSub;
 $(document).ready(function () {
+    //Modal icon de carregamento
+    $("#reload").modal('show');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    addKeyupEvent($('#inputPesquisa'));
     slide();
     cardProdutoDestaque();
     categoria();
 });
+
+// $("#inputPesquisa").on('keyup', function () {
+//     if ($(this).val().length >= 3) {
+//         console.log($(this).val());
+//     }
+// });
 
 function slide() {
     $.ajax({
@@ -86,6 +104,7 @@ function categoria() {
                         });
                         $('.' + textMinusula).html(htmlSubMenu);
 
+                        $("#reload").modal('hide');
 
                     }, error: function (erros) {
 
@@ -120,6 +139,7 @@ function categoria() {
 
 //Funão para Produtos em destaque
 function cardProdutoDestaque() {
+    $("#h2-produtos").text('Produtos em destaque');
     $.ajax({
         type: "POST",
         url: "/inicial/produto/destaque",
@@ -138,6 +158,8 @@ function cardProdutoDestaque() {
 
 //Função para produtos filtrados
 function filtroCategoriaProduto(idCategoria) {
+    idCategoriaorSub = idCategoria;
+    $("#h2-produtos").text('Produtos');
     htmlCardPDestaque = '';
     $.ajax({
         type: "POST",
@@ -147,9 +169,19 @@ function filtroCategoriaProduto(idCategoria) {
         },
         dataType: "JSON",
         success: function (data) {
-            result = data;
-            paginar();
-            ajustarBotoes();
+            console.log(data);
+            if (data != '') {
+                result = data;
+                paginar();
+                ajustarBotoes();
+            } else {
+                result = '';
+                paginar();
+                ajustarBotoes();
+                $('#divProdutoDestaque').empty();
+                $("#divProdutoDestaque").html('<div><h1>Ainda não temos produtos para essa categoria</h1></div>');
+            }
+
             // $.each(data, function (indexInArray, valueOfElement) {
             //     filtroProduto += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + valueOfElement.nome_arquivo + '" alt="" ><h2>' + valueOfElement.id + '</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
             //     // console.log(valueOfElement.nome_arquivo);
@@ -201,3 +233,48 @@ $('#anterior').click(function () {
         ajustarBotoes();
     }
 });
+
+//****************************************************************************//
+
+function addKeyupEvent(element) {
+    element.keyup(function (e) {
+        var keyword = $(this).val();
+        clearTimeout($.data(this, 'timer'));
+
+        if (e.keyCode == 13)
+            updateListData(search(keyword, true));
+        else
+            $(this).data('timer', setTimeout(function () {
+                updateListData(search(keyword));
+            }, 500));
+    });
+}
+
+function search(keyword, force) {
+    if (!force && keyword.length < 4)
+        return '';
+
+    if (cache.hasOwnProperty(keyword))
+        return cache[keyword];
+
+    $.ajax({
+        type: 'POST',
+        url: "/inicial/filtro/produto/pesquisa",
+        async: false,
+        data: {
+            textProduto: keyword,
+            idCategoriaorSub: idCategoriaorSub
+        },
+        success: function (data) {
+            cache[keyword] = data;
+            return data;
+        },
+        error: function () {
+            throw new Error('Error occured');
+        }
+    });
+}
+
+function updateListData(data) {
+    $('#listafornecedores').html(data);
+}

@@ -24,9 +24,7 @@ class PainelInicialController extends Controller
     }
     public function indexProdutoDestaque(Request $request)
     {
-        $pagina = $request->pagina;
-        $quant_pagina = $request->quant_pagina;
-        // dd($quant_pagina);
+
         $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
         return $consultaProdutoDestaque;
     }
@@ -46,16 +44,28 @@ class PainelInicialController extends Controller
     }
     public function indexCategoriaID(Request $request)
     {
-        $jsjsjsj = $request->idCategoria;
-        $asdadasdas = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$jsjsjsj]);
+        $idCategoria = $request->idCategoria;
+        $asdadasdas = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$idCategoria]);
         return response()->json($asdadasdas);
     }
     public function indexBuscaProdutoCategoria(Request $request)
     {
         $idCategoria = $request->idCategoria;
-        // dd($idCategoria);
         $consultaProduto = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = ?', [$idCategoria]);
 
         return response()->json($consultaProduto);
+    }
+    public function indexPesquisaProduto(Request $request)
+    {
+        $nomeProduto = $request->textProduto;
+        $idCategoria = $request->idCategoriaorSub;
+
+        // $consultaProdutoPesquisa = DB::select("SELECT produtos.descr  FROM produtos WHERE produtos.descr LIKE '%..%' AND produtos.grupo = 13", []);
+        $consultaProdutoPesquisa = DB::table('produtos')
+        ->select('produtos.descr')
+        ->where('descr', 'like', '%' . $nomeProduto . '%');
+
+        
+        dd($consultaProdutoPesquisa);
     }
 }
