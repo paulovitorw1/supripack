@@ -1,4 +1,4 @@
-<h1 align="center">Bem vindo a loja online Supripack 👋</h1>
+<h1 align="center">Bem vindo a loja on-line Supripack 👋</h1>
 
 > Projeto desenvolvido em Laravel (PHP).
 
