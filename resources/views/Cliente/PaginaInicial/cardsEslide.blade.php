@@ -1,6 +1,6 @@
 @extends('Painel.index_painel')
 @section('conteudo')
-    <div class="modal fade in" id="reload" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
+    <div class="modal fade in" id="loading" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
         aria-hidden="false" style="display: block; pointer-events: none;">
         <div class="lds-ring">
             <div></div>
@@ -70,7 +70,7 @@
 
                     </div>
 
-                    <div>
+                    <div style="margin-bottom: 2%;">
 
                         <button class="btn btn-primary" id="anterior" disabled>&lsaquo; Anterior</button>
                         <span class="page-link" id="numeracao"></span>

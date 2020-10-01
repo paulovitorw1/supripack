@@ -12,10 +12,10 @@
 }
 
 
-
 .rm0Cadastro {
     margin-right: 0% !important;
 }
+
 
 .labelsLogin {
     padding: 0 !important;
@@ -43,6 +43,13 @@
 .cursoPoint {
     cursor: pointer;
 }
+
+.dadosNecontrado {
+    background: #d8cece3d;
+    padding: 4%;
+
+}
+
 
 /*LOADER */
 .lds-ring {
@@ -88,8 +95,5 @@
         transform: rotate(360deg);
     }
 }
-
-
-
 
 /*FIM LOADER */

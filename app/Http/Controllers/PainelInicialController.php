@@ -62,10 +62,18 @@ class PainelInicialController extends Controller
 
         // $consultaProdutoPesquisa = DB::select("SELECT produtos.descr  FROM produtos WHERE produtos.descr LIKE '%..%' AND produtos.grupo = 13", []);
         $consultaProdutoPesquisa = DB::table('produtos')
-        ->select('produtos.descr')
-        ->where('descr', 'like', '%' . $nomeProduto . '%');
+            ->select('produtos.descr', 'produtos.grupo', 'fotos.id_foto', 'fotos.nome_arquivo')
+            ->join('fotos', 'produtos.id', '=', 'fotos.id_produto')
+            ->where(
+                [
+                    ['descr', 'like', '%' . $nomeProduto . '%'],
+                    ['grupo', '=', $idCategoria],
 
-        
-        dd($consultaProdutoPesquisa);
+                ]
+            )
+            ->get();
+
+        return response()->json($consultaProdutoPesquisa);
+        // dd($consultaProdutoPesquisa);
     }
 }
