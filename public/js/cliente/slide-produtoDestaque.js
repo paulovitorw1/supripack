@@ -17,6 +17,12 @@ var pagina = 0;
 //Cache de pesquisa
 var cache = {};
 var idCategoriaorSub;
+
+//********************************************************************//
+var indice_selecionado = -1; //Índice do item selecionado na lista
+var produtoStorage;
+if (produtoStorage == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+    produtoStorage = [];
 $(document).ready(function () {
     //Modal icon de carregamento
     $("#loading").modal('show');
@@ -31,12 +37,6 @@ $(document).ready(function () {
     cardProdutoDestaque();
     categoria();
 });
-
-// $("#inputPesquisa").on('keyup', function () {
-//     if ($(this).val().length >= 3) {
-//         console.log($(this).val());
-//     }
-// });
 
 function slide() {
     $.ajax({
@@ -189,7 +189,7 @@ function paginar() {
 
     for (var i = pagina * tamanhoPagina; i < result.length && i < (pagina + 1) * tamanhoPagina; i++) {
         //Armazenando os produtos na variavel
-        htmlCardPDestaque += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + result[i].nome_arquivo + '" alt="" ><h2>' + result[i].id + '</h2><p>Easy Polo Black Edition</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>' + result[i].descr + '</p> <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
+        htmlCardPDestaque += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + result[i].nome_arquivo + '" alt="" ><h2>' + result[i].id + '</h2><p>Easy Polo Black Edition</p> <a href="javascript:void(0)" class="btn btn-default add-to-cart" onclick="addProdutoLocalStore();"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>' + result[i].descr + '</p> <a href="javascript:void(0)" class="btn btn-default add-to-cart" onclick="addProdutoLocalStore(' + result[i].id + ');"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
 
     }
     //Populando a DIV
@@ -274,7 +274,42 @@ function search(keyword, force) {
     });
 }
 
-// function updateListData(data) {
-//     // console.log("ddd" + data);
-//     $('#listafornecedores').html(data);
+function addProdutoLocalStore(idProdutoStorage) {
+    if (typeof (Storage) != "undefined") {
+
+        var arrayIdprodutos =
+        {
+            'produto_id': idProdutoStorage,
+            'quant_produto': 1
+        };
+
+        // if (idProdutoStorage == arrayIdprodutos) {
+
+        // } else {
+
+        // }
+        console.log(arrayIdprodutos.quant_produto);
+
+        // $.each(arrayIdprodutos, function (indexInArray, valueOfElement) {
+        // });
+
+        produtoStorage.push(arrayIdprodutos);
+
+        console.log(produtoStorage);
+
+        localStorage.setItem("produto", JSON.stringify(produtoStorage));
+        alert("Registro adicionado.");
+        return true;
+    }
+}
+// function addProdutoLocalStore(idProdutoStorage) {
+//     if (typeof (Storage) != "undefined") {
+//         if (localStorage.idProdutoStorage) {
+//             localStorage.idproduto = Number(idProdutoStorage.idproduto) + 1;
+//         } else {
+//             localStorage.idProdutoStorage = Number(idProdutoStorage);
+//         }
+//     } else {
+//         alert("ERRO");
+//     }
 // }

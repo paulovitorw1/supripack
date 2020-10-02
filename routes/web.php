@@ -22,7 +22,9 @@ Route::group(['prefix' => 'inicial'], function () {
     Route::post('/tesste', 'PainelInicialController@indexCategoriaID')->name('indexCategoriaID');
     Route::post('/filtro/produto', 'PainelInicialController@indexBuscaProdutoCategoria')->name('indexBuscaProdutoCategoria');
     Route::post('/filtro/produto/pesquisa', 'PainelInicialController@indexPesquisaProduto')->name('indexPesquisaProduto');
-
+});
+Route::group(['prefix' => 'inicial/carrinho'], function () {
+    Route::get('/', 'CarrinhoController@indexCarrinho')->name('indexCarrinho');
 });
 //Tela Inicial
 //
