@@ -23,8 +23,10 @@ Route::group(['prefix' => 'inicial'], function () {
     Route::post('/filtro/produto', 'PainelInicialController@indexBuscaProdutoCategoria')->name('indexBuscaProdutoCategoria');
     Route::post('/filtro/produto/pesquisa', 'PainelInicialController@indexPesquisaProduto')->name('indexPesquisaProduto');
 });
+//GRUPO DE ROTAS PARA O CARRINHO
 Route::group(['prefix' => 'inicial/carrinho'], function () {
     Route::get('/', 'CarrinhoController@indexCarrinho')->name('indexCarrinho');
+    Route::post('/lista/produto', 'CarrinhoController@listaProduto')->name('listaProduto');
 });
 //Tela Inicial
 //

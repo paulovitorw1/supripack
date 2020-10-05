@@ -1,3 +1,4 @@
+
 //Variaveis para o carusel 
 var htmlSlide = '';
 var htmlLiSlide = '';
@@ -19,10 +20,9 @@ var cache = {};
 var idCategoriaorSub;
 
 //********************************************************************//
-var indice_selecionado = -1; //Índice do item selecionado na lista
-var produtoStorage;
-if (produtoStorage == null) // Caso não haja conteúdo, iniciamos um vetor vazio
-    produtoStorage = [];
+var produtoStorage = JSON.parse(localStorage.getItem("produto"));
+
+var arrayIdprodutos = {};
 $(document).ready(function () {
     //Modal icon de carregamento
     $("#loading").modal('show');
@@ -36,6 +36,10 @@ $(document).ready(function () {
     slide();
     cardProdutoDestaque();
     categoria();
+
+    $('.countProd').html(produtoStorage.length);
+
+
 });
 
 function slide() {
@@ -277,28 +281,29 @@ function search(keyword, force) {
 function addProdutoLocalStore(idProdutoStorage) {
     if (typeof (Storage) != "undefined") {
 
-        var arrayIdprodutos =
-        {
-            'produto_id': idProdutoStorage,
-            'quant_produto': 1
-        };
+        if (produtoStorage == null) {
+            produtoStorage = [];
+            arrayIdprodutos =
+            {
+                'produto_id': idProdutoStorage,
+            };
 
-        // if (idProdutoStorage == arrayIdprodutos) {
+        } else {
+            arrayIdprodutos =
+            {
+                'produto_id': idProdutoStorage,
+            };
 
-        // } else {
-
-        // }
-        console.log(arrayIdprodutos.quant_produto);
-
-        // $.each(arrayIdprodutos, function (indexInArray, valueOfElement) {
-        // });
+        }
 
         produtoStorage.push(arrayIdprodutos);
 
-        console.log(produtoStorage);
-
         localStorage.setItem("produto", JSON.stringify(produtoStorage));
         alert("Registro adicionado.");
+
+        var countProdlength = JSON.parse(localStorage.getItem("produto"));
+        $('.countProd').html(countProdlength.length);
+
         return true;
     }
 }

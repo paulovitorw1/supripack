@@ -45,9 +45,10 @@ class PainelInicialController extends Controller
     public function indexCategoriaID(Request $request)
     {
         $idCategoria = $request->idCategoria;
-        $asdadasdas = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$idCategoria]);
-        return response()->json($asdadasdas);
+        $consultaGrupCategoria = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$idCategoria]);
+        return response()->json($consultaGrupCategoria);
     }
+    //CONSULTANDO PRODUTO PELA CATEGORIA SELECIONADA
     public function indexBuscaProdutoCategoria(Request $request)
     {
         $idCategoria = $request->idCategoria;
@@ -55,6 +56,7 @@ class PainelInicialController extends Controller
 
         return response()->json($consultaProduto);
     }
+    //FUNÇÃO PARA BUSCAR PRODUTOS PELO INPUT DE PESQUISA
     public function indexPesquisaProduto(Request $request)
     {
         $nomeProduto = $request->textProduto;
@@ -74,6 +76,7 @@ class PainelInicialController extends Controller
             ->get();
 
         return response()->json($consultaProdutoPesquisa);
-        // dd($consultaProdutoPesquisa);
     }
+
+
 }
