@@ -17,7 +17,7 @@
                 </ol>
             </div>
             <div class="table-responsive cart_info">
-                <table class="table table-condensed">
+                <table class="table table-condensed" id="tableProdutoCarrinho">
                     <thead>
                         <tr class="cart_menu">
                             <td class="image">
@@ -25,149 +25,36 @@
                                     <font style="vertical-align: inherit;">Item</font>
                                 </font>
                             </td>
-                            <td class="description"></td>
+
                             <td class="price">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">Preço</font>
                                 </font>
                             </td>
+
                             <td class="quantity">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">Quantidade</font>
                                 </font>
                             </td>
+
                             <td class="total">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">Total</font>
                                 </font>
                             </td>
-                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="cart_product">
-                                <a href=""><img src="images/cart/one.png" alt=""></a>
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;">Colorblock Scuba</font>
-                                        </font>
-                                    </a></h4>
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">ID da web: 1089772</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_price">
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;"> + </font>
-                                        </font>
-                                    </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                        autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;"> - </font>
-                                        </font>
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="cart_product">
-                                <a href=""><img src="images/cart/two.png" alt=""></a>
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;">Colorblock Scuba</font>
-                                        </font>
-                                    </a></h4>
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">ID da web: 1089772</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_price">
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;"> + </font>
-                                        </font>
-                                    </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                        autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;"> - </font>
-                                        </font>
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="cart_product">
                                 <a href=""><img src="images/cart/three.png" alt=""></a>
                             </td>
                             <td class="cart_description">
-                                <h4><a href="">
-                                        <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;">Colorblock Scuba</font>
-                                        </font>
-                                    </a></h4>
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">ID da web: 1089772</font>
-                                    </font>
-                                </p>
+                                Colorblock Scuba
                             </td>
                             <td class="cart_price">
-                                <p>
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
+                                $59
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
@@ -186,21 +73,26 @@
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
-                                    </font>
-                                </p>
+                                52
                             </td>
                             <td class="cart_delete">
                                 <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
+
+    {{-- <p class="cart_total_price">
+        <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">$ 59</font>
+        </font>
+    </p> --}}
+
+
 
     <section id="do_action">
         <div class="container">
@@ -424,9 +316,11 @@
         </div>
     </section>
 @section('css')
-
+{{-- <link rel="stylesheet" href="style.css"> --}}
 @endsection
 @section('js')
     <script src="{{ asset('js/carrinho/carrinho.js') }}"></script>
+    <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
+
 @endsection
 @endsection

@@ -20,12 +20,13 @@ var cache = {};
 var idCategoriaorSub;
 
 //********************************************************************//
+//pegando os valores salvo no LOCALSTORANGE
 var produtoStorage = JSON.parse(localStorage.getItem("produto"));
-
 var arrayIdprodutos = {};
 $(document).ready(function () {
     //Modal icon de carregamento
     $("#loading").modal('show');
+    //TOKEN
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -281,40 +282,52 @@ function search(keyword, force) {
 function addProdutoLocalStore(idProdutoStorage) {
     if (typeof (Storage) != "undefined") {
 
-        if (produtoStorage == null) {
-            produtoStorage = [];
-            arrayIdprodutos =
-            {
-                'produto_id': idProdutoStorage,
-            };
+        // if (produtoStorage == null) {
+        //     produtoStorage = [];
+        //     arrayIdprodutos =
+        //     {
+        //         'produto_id': idProdutoStorage,
+        //     };
 
-        } else {
-            arrayIdprodutos =
-            {
-                'produto_id': idProdutoStorage,
-            };
+        // } else {
+        //     arrayIdprodutos =
+        //     {
+        //         'produto_id': idProdutoStorage,
+        //     };
 
+        // }
+        //Todos os valores armazenados em localStorage são strings.
+        //Pegue nossa string de linha de itens de localStorage.
+        var stringFromLocalStorage = window.localStorage.getItem("produto");
+
+        //Em seguida, analise essa string em um valor real.
+        var parsedValueFromString = JSON.parse(stringFromLocalStorage);
+
+        //Se esse valor for nulo (o que significa que nunca salvamos nada naquele local em localStorage antes), use um array vazio como nosso array. Caso contrário, mantenha o valor que acabamos de analisar.
+        var array = parsedValueFromString || [];
+
+        //Aqui está o valor que queremos adicionar
+        var value = idProdutoStorage;
+
+        // Se nosso array analisado / vazio ainda não tiver esse valor ...
+        if (array.indexOf(value) == -1) {
+            // adiciona o valor ao array
+            array.push(value);
+
+            // transforma o array  em uma string para prepará-lo para ser armazenado em localStorage
+            var stringRepresentingArray = JSON.stringify(array);
+
+            // e armazene-o em localStorage como "produto"
+            window.localStorage.setItem("produto", stringRepresentingArray);
         }
-
-        produtoStorage.push(arrayIdprodutos);
-
-        localStorage.setItem("produto", JSON.stringify(produtoStorage));
+        // produtoStorage.push(arrayIdprodutos);
+        // localStorage.setItem("produto", JSON.stringify(produtoStorage));
         alert("Registro adicionado.");
 
         var countProdlength = JSON.parse(localStorage.getItem("produto"));
+        console.log(countProdlength);
         $('.countProd').html(countProdlength.length);
 
         return true;
     }
 }
-// function addProdutoLocalStore(idProdutoStorage) {
-//     if (typeof (Storage) != "undefined") {
-//         if (localStorage.idProdutoStorage) {
-//             localStorage.idproduto = Number(idProdutoStorage.idproduto) + 1;
-//         } else {
-//             localStorage.idProdutoStorage = Number(idProdutoStorage);
-//         }
-//     } else {
-//         alert("ERRO");
-//     }
-// }
