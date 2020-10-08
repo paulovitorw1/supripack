@@ -77,6 +77,4 @@ class PainelInicialController extends Controller
 
         return response()->json($consultaProdutoPesquisa);
     }
-
-
 }

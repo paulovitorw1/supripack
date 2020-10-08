@@ -11,13 +11,15 @@ $(document).ready(function () {
     });
 
     getProdutoStorange();
+
+
+
 });
 
 function getProdutoStorange() {
     if (getlocalStorage == null) {
 
     } else {
-
         table = $("#tableProdutoCarrinho").DataTable({
             serverSide: false,
             filter: true,
@@ -32,14 +34,16 @@ function getProdutoStorange() {
                 cache: true,
                 type: "POST",
             },
+            "columnDefs": [
+                { className: "kkkkkkk", "targets": [0] }
+            ],
             columns: [
                 { data: 'id' },
                 { data: 'descr' },
-                { data: 'id_foto', defaultContent: "<i>Not set</i>" },
-                // { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
 
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+                { data: 'sssss', name: 'sssss', orderable: false, searchable: false }
 
-                { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             //Traduzindo a Tabela para o PORTUGUÊS
             "bJQueryUI": true,
@@ -80,3 +84,16 @@ function getProdutoStorange() {
     }
 }
 
+
+function quantdd(classId) {
+    console.log(classId);
+    var valorAtual = Number($(".valor" + classId).val());
+    var ssjssjs = Number(++valorAtual);
+    var novoValor = $(".valor" + classId).val(ssjssjs);
+
+}
+function quantRemove(classId) {
+    var valorAtual = Number($(".valor" + classId).val());
+    var ssjssjs = Number(--valorAtual);
+    var novoValor = $(".valor" + classId).val(ssjssjs);
+}
