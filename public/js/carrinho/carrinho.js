@@ -1,4 +1,4 @@
-//PEGANDO OS VALORES SALVO DO LOCAL STORANGE
+
 var getlocalStorage = JSON.parse(localStorage.getItem('produto'));
 //VARIAVEL QUE VAI ARMAZENAR O HTML
 var htmlProduto = '';
@@ -35,13 +35,15 @@ function getProdutoStorange() {
                 type: "POST",
             },
             "columnDefs": [
-                { className: "kkkkkkk", "targets": [0] }
+                { className: "cart_delete", "targets": [6] }
             ],
             columns: [
                 { data: 'id' },
                 { data: 'descr' },
-
+                { data: 'descr' },
+                { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
+                { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
                 { data: 'sssss', name: 'sssss', orderable: false, searchable: false }
 
             ],
@@ -86,14 +88,32 @@ function getProdutoStorange() {
 
 
 function quantdd(classId) {
-    console.log(classId);
     var valorAtual = Number($(".valor" + classId).val());
     var ssjssjs = Number(++valorAtual);
+
     var novoValor = $(".valor" + classId).val(ssjssjs);
 
 }
 function quantRemove(classId) {
-    var valorAtual = Number($(".valor" + classId).val());
-    var ssjssjs = Number(--valorAtual);
-    var novoValor = $(".valor" + classId).val(ssjssjs);
+    var valorAtual = Number.parseInt($(".valor" + classId).val());
+    if (valorAtual > 0) {
+        var ssjssjs = parseInt(--valorAtual);
+        console.log(ssjssjs);
+        var novoValor = $(".valor" + classId).val(ssjssjs);
+    }
+
+
+}
+
+function removeProduto(idProduto) {
+    //pegando o valor selecionado
+    var index = getlocalStorage.indexOf(idProduto);
+    //verificando valor dentro do array e deletando
+    if (index > -1) {
+        getlocalStorage.splice(index, 1);
+    }
+    //Inserindo os novos valores
+    localStorage.setItem('produto', JSON.stringify(getlocalStorage));
+    //Atualizando a tabela
+    getProdutoStorange();
 }

@@ -52,7 +52,13 @@ class PainelInicialController extends Controller
     public function indexBuscaProdutoCategoria(Request $request)
     {
         $idCategoria = $request->idCategoria;
-        $consultaProduto = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = ?', [$idCategoria]);
+        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+
+        // SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = 2 GROUP BY produtos.id
+        $consultaProduto[] = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = 3', [$idCategoria]);
+
 
         return response()->json($consultaProduto);
     }

@@ -22,25 +22,38 @@
                         <tr class="cart_menu">
                             <td class="image">
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">Item</font>
+                                    <font style="vertical-align: inherit;">ID</font>
                                 </font>
                             </td>
 
                             <td class="price">
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">Preço</font>
+                                    <font style="vertical-align: inherit;">Foto</font>
                                 </font>
                             </td>
-
                             <td class="quantity">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">Descricao</font>
+                                </font>
+                            </td>
+                            <td class="quantity">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">Valor Unid.</font>
+                                </font>
+                            </td>
+                            <td class="price">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">Quantidade</font>
                                 </font>
                             </td>
-
                             <td class="total">
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">Total</font>
+                                    <font style="vertical-align: inherit;">Valor</font>
+                                </font>
+                            </td>
+                            <td class="total">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">Excluir</font>
                                 </font>
                             </td>
                         </tr>
@@ -316,7 +329,7 @@
         </div>
     </section>
 @section('css')
-{{-- <link rel="stylesheet" href="style.css"> --}}
+    <link rel="stylesheet" href="{{ asset('css/carrinho.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('js/carrinho/carrinho.js') }}"></script>
