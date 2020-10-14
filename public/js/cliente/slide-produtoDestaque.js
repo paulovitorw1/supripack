@@ -193,6 +193,7 @@ function paginar() {
     $('#divProdutoDestaque').empty();
 
     for (var i = pagina * tamanhoPagina; i < result.length && i < (pagina + 1) * tamanhoPagina; i++) {
+        console.log(result);
         //Armazenando os produtos na variavel
         htmlCardPDestaque += '<div class="col-sm-4"><div class="product-image-wrapper"><div class="single-products"><div class="productinfo text-center"> <img class="cardProduto" src="https://dev.loja.avantz.com.br/images/imagensProdutos/' + result[i].nome_arquivo + '" alt="" ><h2>' + result[i].id + '</h2><p>Easy Polo Black Edition</p> <a href="javascript:void(0)" class="btn btn-default add-to-cart" onclick="addProdutoLocalStore();"><i class="fa fa-shopping-cart"></i>Add to cart</a></div><div class="product-overlay"><div class="overlay-content"><h2>$56</h2><p>' + result[i].descr + '</p> <a href="javascript:void(0)" class="btn btn-default add-to-cart" onclick="addProdutoLocalStore(' + result[i].id + ');"><i class="fa fa-shopping-cart"></i>Add to cart</a></div></div></div></div></div>';
 
@@ -240,7 +241,7 @@ function addKeyupEvent(element) {
             }, 500));
     });
 }
-
+//
 function search(keyword, force) {
     if (!force && keyword.length < 4)
         return '';

@@ -28,15 +28,16 @@ class PainelInicialController extends Controller
         $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
         return $consultaProdutoDestaque;
     }
+
     public function indexCategoria()
     {
         $responseJson = [];
-        $consultaCategoria = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 1');
+        $consultaCategoria = DB::select('SELECT id, niv, nv1, nv1id, nv2, nv2id,nv3 FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 1');
         // $responseJson = ['menu' => $consultaCategoria];
 
-        $consultaSubCategoria = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 2 ');
+        $consultaSubCategoria = DB::select('SELECT id, niv, nv1, nv1id, nv2, nv2id,nv3 FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 2 ');
 
-        $consultaSubsCategoria = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 3');
+        $consultaSubsCategoria = DB::select('SELECT id, niv, nv1, nv1id, nv2, nv2id,nv3 FROM prod_grp WHERE instit = 1 AND prod_grp.niv = 3');
 
         $responseJson = ['menu' => $consultaCategoria, 'subMenu' => $consultaSubCategoria, 'subsub' => $consultaSubsCategoria];
 
@@ -45,22 +46,27 @@ class PainelInicialController extends Controller
     public function indexCategoriaID(Request $request)
     {
         $idCategoria = $request->idCategoria;
-        $consultaGrupCategoria = DB::select('SELECT * FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$idCategoria]);
+        $consultaGrupCategoria = DB::select('SELECT id, niv, nv1, nv1id, nv2, nv2id,nv3 FROM prod_grp WHERE instit = 1 AND prod_grp.nv1id = ?', [$idCategoria]);
+
         return response()->json($consultaGrupCategoria);
     }
     //CONSULTANDO PRODUTO PELA CATEGORIA SELECIONADA
     public function indexBuscaProdutoCategoria(Request $request)
     {
+        $arrayProdutoUniq = array();
         $idCategoria = $request->idCategoria;
-        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-        //ANALIZAR ESSE SELECTTT AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 
-        // SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = 2 GROUP BY produtos.id
-        $consultaProduto[] = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_produto WHERE produtos.grupo = 3', [$idCategoria]);
+        $consultaProduto = DB::table('produtos')
+            ->select('id', 'nome', 'descr', 'valor_uni_tributavel', 'id_foto', 'id_produto', 'nome_arquivo')
+            ->leftJoin('fotos', 'fotos.id_produto', '=', 'produtos.id')
+            ->where('produtos.grupo', [$idCategoria])
+            ->get();
+        //definindo linha unica 
+        $consultaUniqueProduto = $consultaProduto->unique('id');
+        //Pegando todos os dados
+        $arrayProdutoUniq = $consultaUniqueProduto->values()->all();
 
-
-        return response()->json($consultaProduto);
+        return response()->json($arrayProdutoUniq);
     }
     //FUNÇÃO PARA BUSCAR PRODUTOS PELO INPUT DE PESQUISA
     public function indexPesquisaProduto(Request $request)
