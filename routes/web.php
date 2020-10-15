@@ -19,7 +19,7 @@ Route::group(['prefix' => 'inicial'], function () {
     Route::get('/slide', 'PainelInicialController@indexSlide')->name('indexSlide');
     Route::post('/produto/destaque', 'PainelInicialController@indexProdutoDestaque')->name('indexProdutoDestaque');
     Route::get('/categoria', 'PainelInicialController@indexCategoria')->name('indexCategoria');
-    Route::post('/tesste', 'PainelInicialController@indexCategoriaID')->name('indexCategoriaID');
+    Route::post('/meuCategoria', 'PainelInicialController@indexCategoriaID')->name('indexCategoriaID');
     Route::post('/filtro/produto', 'PainelInicialController@indexBuscaProdutoCategoria')->name('indexBuscaProdutoCategoria');
     Route::post('/filtro/produto/pesquisa', 'PainelInicialController@indexPesquisaProduto')->name('indexPesquisaProduto');
 });
@@ -36,16 +36,23 @@ Route::group(['prefix' => 'usuario'], function () {
 //
 Route::group(['prefix' => 'admin/config'], function () {
     Route::get('/', 'ConfiguracaoController@indexConfiguracao')->name("ssss");
-    //****************************CONFIGURAÇÃO PARA O SLIDE*************************************\\
+    //***************************************************************************************\\
+    //*********************************ROTAS PARA O SLIDE*************************************\\
+    //*****************************************************************************************\\
     Route::get('/carousel', 'ConfiguracaoController@carousel')->name("view");
     Route::any('/carousel/adicinar', 'ConfiguracaoController@carouselAdd')->name("adicionarImgCarousel");
     Route::post('/carousel/editar', 'ConfiguracaoController@editarCarousel')->name("editarCarousel");
     Route::post('/carousel/delete', 'ConfiguracaoController@deleteCarousel')->name("deleteCarousel");
-    //***********************CONFIGURAÇÃO PARA O CARDS DESTAQUE*******************************\\
+    //*******************************************************************************************\\
+    //******************************ROTAS PARA O CARDS DESTAQUE***********************************\\
+    //*********************************************************************************************\\
     Route::get('/produto/destaque', 'ConfiguracaoController@viewProdutoDestaque')->name('viewCardsDEstaque');
-
     Route::post('/produto/destaque/visualizar', 'ConfiguracaoController@viewProduto')->name('viewProduto');
     Route::post('/produto/destaque/addDestaque', 'ConfiguracaoController@addDestaque')->name('addDestaque');
     Route::post('/produto/destaque/delete', 'ConfiguracaoController@deleteDestaque')->name("deleteDestaque");
+    //*******************************************************************************************\\
+    //******************************ROTAS PARA O CUPOM********************************************\\
+    //*********************************************************************************************\\
+    Route::get('/cupom', 'ConfiguracaoController@viewCupom')->name('viewCupom');
 });
 Auth::routes();

@@ -85,7 +85,17 @@ function getProdutoStorange() {
         // });
     }
 }
-
+//CUPOM 
+$("#checkboxcupom").change(function (e) {
+    // alert("ddasda");
+    if (this.checked == true) {
+        $('.divCupom').removeClass('displayNone');
+        $('#inputCupom').val('');
+    } else {
+        $('.divCupom').addClass('displayNone');
+        $('#inputCupom').val('');
+    }
+});
 
 function quantdd(classId) {
     var valorAtual = Number($(".valor" + classId).val());

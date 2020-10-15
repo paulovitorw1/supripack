@@ -20,9 +20,11 @@
                                 <div id="sportswear" class="panel-collapse collapse layout-supri">
                                     <div class="panel-body">
                                         <ul>
-                                            <li class="lcarousel"><a class="lcarousel" href="/admin/config/carousel">carousel</a></li>
-                                            <li class="lcardsDestaque"><a class="lcardsDestaque" href="/admin/config/produto/destaque">Produtos destaque</a></li>
-                                            <li><a href="">Adidas </a></li>
+                                            <li class="lcarousel"><a class="lcarousel"
+                                                    href="/admin/config/carousel">carousel</a></li>
+                                            <li class="lcardsDestaque"><a class="lcardsDestaque"
+                                                    href="/admin/config/produto/destaque">Produtos destaque</a></li>
+                                            <li class="lcupons"><a class="lcupons" href="/admin/config/cupom">Cupons</a></li>
                                             <li><a href="">Puma</a></li>
                                             <li><a href="">ASICS </a></li>
                                         </ul>
@@ -126,11 +128,11 @@
         </div>
     </section>
 @section('css')
-<link rel="stylesheet" href="{{ asset('libs/fontawesome-free/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('libs/DataTables/DataTables-b/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/DataTables/DataTables-b/css/dataTables.bootstrap.min.css') }}">
 @endsection
 @section('js')
-<script src="{{ asset('libs/fontawesome-free/js/all.min.js') }}"></script>
-<script src="{{ asset('libs/DataTables/DataTables-b/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('libs/fontawesome-free/js/all.min.js') }}"></script>
+    <script src="{{ asset('libs/DataTables/DataTables-b/js/dataTables.bootstrap.min.js') }}"></script>
 @endsection
 @endsection

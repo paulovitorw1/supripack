@@ -89,7 +89,7 @@ function categoria() {
                 //REQUISIÇÃO PARA SUB-MEUs
                 $.ajax({
                     type: "POST",
-                    url: "/inicial/tesste",
+                    url: "/inicial/meuCategoria",
                     data: {
                         idCategoria: valueOfElementMeunu.id
                     },

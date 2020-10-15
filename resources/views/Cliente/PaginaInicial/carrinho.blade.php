@@ -126,30 +126,39 @@
                 <div class="col-sm-6">
                     <div class="chose_area">
                         <ul class="user_option">
-                            <li>
-                                <input type="checkbox">
+                            <li class="li-cupom">
+                                <input type="checkbox" name="cupom" id="checkboxcupom">
                                 <label>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">Use o código do cupom</font>
                                     </font>
                                 </label>
+                                <br>
+                                <div class="divCupom displayNone">
+                                    <label>
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">Digite o cupom</font>
+                                        </font>
+                                    </label>
+                                    <input type="text" class="form-control" name="inputCupom" id="inputCupom">
+                                </div>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <input type="checkbox">
                                 <label>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">Utilize o Voucher de Presente</font>
                                     </font>
                                 </label>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <input type="checkbox">
                                 <label>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">Estimativa de remessa e impostos</font>
                                     </font>
                                 </label>
-                            </li>
+                            </li> --}}
                         </ul>
                         <ul class="user_info">
                             <li class="single_field">

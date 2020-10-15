@@ -6,6 +6,7 @@ use App\Models\Carousel;
 use App\Models\ProdutoDestaque;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -158,5 +159,26 @@ class ConfiguracaoController extends Controller
         $deleteProdutoDestaque->status_destaque = 0;
         $deleteProdutoDestaque->update();
         return response()->json($deleteProdutoDestaque);
+    }
+    //********************************************************************************************************//
+    //**************************************FUNÇÕES PARA OS CUPOM ********************************************//
+    //********************************************************************************************************//
+    public function viewCupom(Request $request)
+    {
+        //Consultado todos os cupons
+        $consultaCupons = DB::select('SELECT * FROM e_cupom');
+        if ($request->ajax()) {
+
+            return DataTables::of($consultaCupons)
+                ->addColumn('action', function ($consultaCupons) {
+                    return
+                        '<div class="divBtnAcoes">' .
+                        '<button onclick="viewCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                        '<button onclick="editarCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                        '<button onclick="deleteCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                        '</div>';
+                })->make(true);
+        }
+        return view('Administrativo.adminCarouselAndCards/cupom');
     }
 }

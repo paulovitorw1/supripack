@@ -25,8 +25,22 @@ class PainelInicialController extends Controller
     public function indexProdutoDestaque(Request $request)
     {
 
-        $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
-        return $consultaProdutoDestaque;
+        $arrayProdutoUniq = array();
+        $idCategoria = $request->idCategoria;
+
+        $consultaProduto = DB::table('produtos')
+            ->select('id', 'nome', 'descr', 'valor_uni_tributavel', 'produtos.status_destaque', 'id_foto', 'id_produto', 'nome_arquivo')
+            ->leftJoin('fotos', 'fotos.id_produto', '=', 'produtos.id')
+            ->where('produtos.status_destaque', '=', 1)
+            ->get();
+        //definindo linha unica 
+        $consultaUniqueProduto = $consultaProduto->unique('id');
+        //Pegando todos os dados
+        $arrayProdutoUniq = $consultaUniqueProduto->values()->all();
+
+        return response()->json($arrayProdutoUniq);
+        // $consultaProdutoDestaque = DB::select('SELECT * FROM produtos INNER JOIN fotos ON produtos.id = fotos.id_foto WHERE produtos.status_destaque = 1');
+        // return $consultaProdutoDestaque;
     }
 
     public function indexCategoria()
