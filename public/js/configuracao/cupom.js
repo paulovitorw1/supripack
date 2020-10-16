@@ -53,7 +53,33 @@ $(document).ready(function () {
             }
         }
     });
+
+    //Masks
+    $('.data').mask('00/00/0000');
+    $('.valor').mask('0.000,00', { reverse: true });
+
+
 });
+//Mudando a mascara de tipo do cupom
+$('#tipoValor').change(function () {
+    if ($(this).val() == 1) {
+        $('.valor').val('');
+        $('.valor').mask('0.000,00', { reverse: true });
+    } else {
+        $('.valor').val('');
+        $('.valor').mask('000,00%', { reverse: true });
+
+    }
+});
+function addCupom() {
+    //Resetando os dados
+    $('#formAddCupom').each(function () {
+        this.reset();
+    });
+    //Abrindo o modal
+    $("#modalAddCupom").modal('show');
+
+}
 
 
 

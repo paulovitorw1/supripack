@@ -67,61 +67,73 @@
         </div>
     </div>
     {{-- MODAL ADD ITEM CAROUSEL --}}
-    <div class="modal fade" id="modalAddItemCarousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="modalAddCupom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Imagens<button type="button" class="close"
+                    <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Cupom<button type="button" class="close"
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></h5>
 
                 </div>
-                <div class="modal-body" style="padding: 0;">
+                <div class="modal-body" style="padding: 0%">
                     <div class="col">
-                        <div class="view-product" id="ttttttt">
-                            <form id="formUpload" method="POST" enctype="multipart/form-data">
-                                {{-- <div class="file"> --}}
-                                    <input id="kv-explorer" type="file" id="inputfileCa" name="addImgCarousel[]" multiple>
-                                    {{-- </div> --}}
+                        <div class="view-cupom" id="ttttttt">
+                            <form id="formAddCupom" method="POST" enctype="multipart/form-data">
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nomeCupom">Nome do Cupom</label>
+                                        <input type="text" class="form-control nomecupom"
+                                            placeholder="Digite o nome do cupom" name="nomecupom">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleFormControlSelect1">Tipo de cupom</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option value="">Selecione o tipo do cupom </option>
+                                            <option value="1">Frete</option>
+                                            <option value="2">Produto</option>
+                                            <option value="3">Produto e Frete</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="tipoValor">Tipo valor</label>
+                                        <select class="form-control" id="tipoValor" name="tipoValor">
+                                            <option value="">Selecione</option>
+                                            <option value="1">$ (valor em valor real)</option>
+                                            <option value="2">% (valor em porcentagem)</option>
 
-
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Valor do cupom</label>
+                                        <input type="text" class="form-control valor"
+                                            placeholder="Digite o valor do desconto">
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nome">Quantidade de cupom</label>
+                                        <input type="number" class="form-control quantidade"
+                                            placeholder="Digite a quantidade de cupons">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Data de validade</label>
+                                        <input type="text" class="form-control data"
+                                            placeholder="Digite a data de validade do cupom">
+                                    </div>
+                                </div>
                                 <br>
                             </form>
                         </div>
-                        {{-- <div id="similar-product" class="carousel slide"
-                            data-ride="carousel">
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                            alt=""></a>
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar2.jpg') }}"
-                                            alt=""></a>
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                            alt=""></a>
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                            alt=""></a>
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                            alt=""></a>
-                                    <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                            alt=""></a>
-
-                                </div>
-
-
-                            </div>
-
-                        </div> --}}
-
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="btnform" class="btn btn-primary">Save
-                        changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" id="btnform" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
@@ -236,7 +248,7 @@
     </script> --}}
     <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/configuracao/cupom.js') }}"></script>
-
+    <script src="{{ asset('libs/jQuery-Mask/src/jquery.mask.min.js') }}"></script>
 @endsection
 
 @endsection

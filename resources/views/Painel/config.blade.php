@@ -24,9 +24,8 @@
                                                     href="/admin/config/carousel">carousel</a></li>
                                             <li class="lcardsDestaque"><a class="lcardsDestaque"
                                                     href="/admin/config/produto/destaque">Produtos destaque</a></li>
-                                            <li class="lcupons"><a class="lcupons" href="/admin/config/cupom">Cupons</a></li>
-                                            <li><a href="">Puma</a></li>
-                                            <li><a href="">ASICS </a></li>
+                                            <li class="lcupons"><a class="lcupons" href="/admin/config/cupom">Cupons</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
