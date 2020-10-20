@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Carousel;
 use App\Models\ProdutoDestaque;
+use App\Models\Cupom;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
@@ -180,5 +182,41 @@ class ConfiguracaoController extends Controller
                 })->make(true);
         }
         return view('Administrativo.adminCarouselAndCards/cupom');
+    }
+    public function addCupom(Request $request)
+    {
+        $dataValidadeCupomMysql = null;
+        $valorCupom = null;
+
+        if ($request->porcentagemOUvalorreal == 1) {
+            $valorCupom = preg_replace('/[^0-9]/', '', substr($request->valorCupom, 0, -2));
+        } else {
+            //
+            $valorCupom = str_replace(',', '.', substr($request->valorCupom, 0, -1));
+        }
+
+        // $dataddd = date_format('Y-m-d H:i:s', strtotime());
+        if ($request->validadeCupom != null) {
+            $dataValidadeCupomMysql = DateTime::createFromFormat('d/m/Y', $request->validadeCupom);
+            $dataValidadeCupomMysql->format('Y-m-d');
+        }
+        //Verificando se o nome do cupom digitado já existe na base de dados
+        $consultaVerifcupom = DB::select('SELECT nome_cupom FROM e_cupom WHERE nome_cupom = ? ', [$request->nomecupom]);
+        
+        if ($consultaVerifcupom == null) {
+            $addCupom  = Cupom::create([
+                'e_id_usuario_addCupom' => 3,
+                'tipo_cupom' => $request->tipoCupom,
+                'nome_cupom' => $request->nomecupom,
+                'porcentagemOUvalorreal' => $request->porcentagemOUvalorreal,
+                'valor_cupom' => $valorCupom,
+                'cupom_quantidade' => $request->cupomQuantidade,
+                'data_validade' => $dataValidadeCupomMysql,
+            ]);
+        } else {
+            dd('CUPOM JÁ EXISTENTE');
+        }
+
+        return response()->json($addCupom);
     }
 }

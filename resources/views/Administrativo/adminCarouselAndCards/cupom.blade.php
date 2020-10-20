@@ -89,8 +89,8 @@
                                             placeholder="Digite o nome do cupom" name="nomecupom">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="exampleFormControlSelect1">Tipo de cupom</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <label for="tipoCupom">Tipo de cupom</label>
+                                        <select class="form-control" id="tipoCupom" name="tipoCupom">
                                             <option value="">Selecione o tipo do cupom </option>
                                             <option value="1">Frete</option>
                                             <option value="2">Produto</option>
@@ -101,7 +101,7 @@
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="tipoValor">Tipo valor</label>
-                                        <select class="form-control" id="tipoValor" name="tipoValor">
+                                        <select class="form-control" id="tipoValor" name="porcentagemOUvalorreal">
                                             <option value="">Selecione</option>
                                             <option value="1">$ (valor em valor real)</option>
                                             <option value="2">% (valor em porcentagem)</option>
@@ -111,19 +111,19 @@
                                     <div class="col-sm-6">
                                         <label for="nome">Valor do cupom</label>
                                         <input type="text" class="form-control valor"
-                                            placeholder="Digite o valor do desconto">
+                                            placeholder="Digite o valor do desconto" name="valorCupom" data-prefix="R$ ">
                                     </div>
                                 </div>
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="nome">Quantidade de cupom</label>
                                         <input type="number" class="form-control quantidade"
-                                            placeholder="Digite a quantidade de cupons">
+                                            placeholder="Digite a quantidade de cupons " name="cupomQuantidade">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Data de validade</label>
                                         <input type="text" class="form-control data"
-                                            placeholder="Digite a data de validade do cupom">
+                                            placeholder="Digite a data de validade do cupom" name="validadeCupom">
                                     </div>
                                 </div>
                                 <br>
@@ -133,14 +133,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" id="btnform" class="btn btn-primary">Salvar</button>
+                    <button type="button" id="btnformAddCupom" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal EDITAR -->
-    <div class="modal fade" id="modalEditItemCarousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="modalEditItemCarousel" tabindex="-1" role="dialog" aria-labelledby="modalEditItemCarousel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -152,7 +152,7 @@
 
                 </div>
                 <div class="modal-body" style="padding: 0;">
-                    <form id="formcarouselPreviwEdit" method="POST" action="" enctype="multipart/form-data">
+                    <form id="formAdd" method="POST" action="" enctype="multipart/form-data">
                         <br>
                         <div class="container-fluid">
                             <div class="row rowPreviwEdit">
@@ -249,6 +249,7 @@
     <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/configuracao/cupom.js') }}"></script>
     <script src="{{ asset('libs/jQuery-Mask/src/jquery.mask.min.js') }}"></script>
+    
 @endsection
 
 @endsection

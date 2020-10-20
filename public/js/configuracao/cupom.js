@@ -1,4 +1,5 @@
 var table;
+var url;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -57,6 +58,8 @@ $(document).ready(function () {
     //Masks
     $('.data').mask('00/00/0000');
     $('.valor').mask('0.000,00', { reverse: true });
+    $('.quantidade').mask('0000');
+
 
 
 });
@@ -80,6 +83,24 @@ function addCupom() {
     $("#modalAddCupom").modal('show');
 
 }
+$('#btnformAddCupom').on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/admin/config/cupom/adicionar",
+        // data: "data",
+        dataType: "JSON",
+        data: new FormData($("#modalAddCupom form")[0]),
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            console.log(data);
+        }, error: function (erros) {
+
+        }
+    });
+});
+
 
 
 
