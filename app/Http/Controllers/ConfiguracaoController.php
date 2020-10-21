@@ -168,7 +168,7 @@ class ConfiguracaoController extends Controller
     public function viewCupom(Request $request)
     {
         //Consultado todos os cupons
-        $consultaCupons = DB::select('SELECT * FROM e_cupom');
+        $consultaCupons = DB::select('SELECT * FROM e_cupom WHERE e_cupom.status = 1');
         if ($request->ajax()) {
 
             return DataTables::of($consultaCupons)
@@ -176,8 +176,8 @@ class ConfiguracaoController extends Controller
                     return
                         '<div class="divBtnAcoes">' .
                         '<button onclick="viewCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                        '<button onclick="editarCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
-                        '<button onclick="deleteCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-eye"></i></button>' .
+                        '<button onclick="editarCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-edit"></i></button>' .
+                        '<button onclick="deleteCupom(' . $consultaCupons->e_id_cupom . ')" class="btn btn-secondary btn-acoes"><i class="fas fa-trash"></i></button>' .
                         '</div>';
                 })->make(true);
         }
@@ -202,12 +202,34 @@ class ConfiguracaoController extends Controller
         }
         //Verificando se o nome do cupom digitado já existe na base de dados
         $consultaVerifcupom = DB::select('SELECT nome_cupom FROM e_cupom WHERE nome_cupom = ? ', [$request->nomecupom]);
-        
+        // $user = DB::select('SELECT * FROM users');
+        //VALIDANDO E PASSANDO AS REGAS
+        $validacaoRegras = [
+            'tipoCupom' => 'required',
+            'nomecupom' => 'required',
+            'porcentagemOUvalorreal' => 'required',
+            'valorCupom' => 'required',
+            'cupomQuantidade' => 'required',
+            'validadeCupom' => 'required',
+
+        ];
+        //PERSONALIZANDO AS MENSAGENS DE ERRO
+        $mensagensPersonalizada = [
+            //CAMPOS PADRÃO
+            'required' => 'O campo :attribute é obrigatório.',
+            // /*PERSONALIZANDO*/
+            // //PESSOA FÍSICA
+            'porcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
+            'nomecupom.required' => 'O campo nome do cupom é obrigatorio.',
+            'cupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
+
+        ];
         if ($consultaVerifcupom == null) {
+            $this->validate($request, $validacaoRegras, $mensagensPersonalizada);
             $addCupom  = Cupom::create([
                 'e_id_usuario_addCupom' => 3,
                 'tipo_cupom' => $request->tipoCupom,
-                'nome_cupom' => $request->nomecupom,
+                'nome_cupom' => strtoupper($request->nomecupom),
                 'porcentagemOUvalorreal' => $request->porcentagemOUvalorreal,
                 'valor_cupom' => $valorCupom,
                 'cupom_quantidade' => $request->cupomQuantidade,
@@ -218,5 +240,110 @@ class ConfiguracaoController extends Controller
         }
 
         return response()->json($addCupom);
+    }
+    public function visualizarCupom(Request $request)
+    {
+        $idCupomEdite = $request->idCupomEdit;
+        $consultaVerifcupom = DB::select('SELECT * FROM e_cupom WHERE e_id_cupom = ? ', [$idCupomEdite]);
+
+        return response()->json($consultaVerifcupom);
+    }
+    public function atualizarCupom(Request $request)
+    {
+        //VALIDANDO E PASSANDO AS REGAS
+        $validacaoRegras = [
+            'tipoCupom' => 'required',
+            'nomecupom' => 'required',
+            'porcentagemOUvalorreal' => 'required',
+            'valorCupom' => 'required',
+            'cupomQuantidade' => 'required',
+            'validadeCupom' => 'required',
+
+        ];
+        //PERSONALIZANDO AS MENSAGENS DE ERRO
+        $mensagensPersonalizada = [
+            //CAMPOS PADRÃO
+            'required' => 'O campo :attribute é obrigatório.',
+            // /*PERSONALIZANDO*/
+            // //PESSOA FÍSICA
+            'porcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
+            'nomecupom.required' => 'O campo nome do cupom é obrigatorio.',
+            'cupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
+
+        ];
+        $this->validate($request, $validacaoRegras, $mensagensPersonalizada);
+
+        $idCupomEdite = $request->idCupomEdit;
+        $editarcupom = Cupom::find($idCupomEdite);
+        // $editarcupom->status = 2;
+        // $editarcupom->status_uso = 3;
+        // $editarcupom->update();
+
+        return response()->json($editarcupom);
+    }
+    public function deleteCupom(Request $request)
+    {
+        $idCupomDelete = $request->idCupom;
+        $deletecupom = Cupom::find($idCupomDelete);
+        $deletecupom->status = 2;
+        $deletecupom->status_uso = 3;
+        $deletecupom->update();
+
+        return response()->json($deletecupom);
+    }
+
+    //Validacao dos campos, validacao personalizadas
+    public function validacaoPersoanalizada(Request $request)
+    {
+        // $user = DB::select('SELECT * FROM users');
+        //VALIDANDO E PASSANDO AS REGAS
+        $validacaoRegras = [
+            'tipoCupom' => 'required',
+            'nomecupom' => 'required',
+            'porcentagemOUvalorreal' => 'required',
+            'valorCupom' => 'required',
+            'cupomQuantidade' => 'required',
+            'validadeCupom' => 'required',
+
+        ];
+        //PERSONALIZANDO AS MENSAGENS DE ERRO
+        $mensagensPersonalizada = [
+            //CAMPOS PADRÃO
+            'required' => 'O campo :attribute é obrigatório.',
+            // /*PERSONALIZANDO*/
+            // //PESSOA FÍSICA
+            'porcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
+            'nomecupom.required' => 'O campo nome do cupom é obrigatorio.',
+            'cupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
+
+            // 'cpf.required_if' => 'O campo CPF é obrigatorio.',
+            // 'identidade.required_if' => 'O campo identidade é obrigatorio.',
+            // 'orgEmissor.required_if' => 'O campo Órgão emissor é obrigatorio.',
+            // 'naturalidade.required_if' => 'O campo naturalidade é obrigatorio.',
+            // 'uf_emissor.required_if' => 'O campo UF é obrigatorio.',
+            // 'data_de_nascimento.required_if' => 'O campo data de nascimento é obrigatorio.',
+            // 'sexo.required_if' => 'O campo sexo é obrigatorio.',
+            // 'naturalidade.required_if' => 'O campo naturalidade é obrigatorio.',
+            // //PESSOA JURÍDICA
+            // 'razaoSocial.required_if' => 'O campo Razão Social é obrigatorio.',
+            // 'nome_fantasia.required_if' => 'O campo nome fantasia é obrigatorio.',
+            // 'cnpj.required_if' => 'O campo CNPJ é obrigatorio.',
+
+            // 'data_de_abertura.required_if' => 'O campo data de abertura é obrigatorio.',
+            // 'tipo_empresa.required_if' => 'O campo tipo de empresa é obrigatorio.',
+            // 'ramo.required_if' => 'O campo ramo é obrigatorio.',
+            // //REFERENCIA
+            // // 'nome_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
+            // // 'parentesco.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
+            // // 'telefone_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
+            // // 'endereco_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
+            // //BANCO
+            // 'nome_banco.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
+            // 'agencia.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
+            // 'conta.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
+            // 'tipo_conta.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
+
+        ];
+        $this->validate($request, $validacaoRegras, $mensagensPersonalizada);
     }
 }
