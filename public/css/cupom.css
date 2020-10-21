@@ -2,6 +2,10 @@
     padding: 0% 20% 0% 20%;
 }
 
+#tableCupom_filter {
+    display: none;
+}
+
 .btn-acoes {
     margin-left: 4%;
     margin-top: 0;
@@ -13,4 +17,12 @@
 
 .modalAddRow {
     margin: 1% 0% 1% 0%;
+}
+
+.inputError {
+    border-color: #dc3545 !important;
+}
+
+.mensagemErro {
+    color: #dc3545 !important;
 }

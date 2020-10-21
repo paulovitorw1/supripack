@@ -85,45 +85,65 @@
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="nomeCupom">Nome do Cupom</label>
-                                        <input type="text" class="form-control nomecupom"
+                                        <input type="text" class="form-control  nomecupom"
                                             placeholder="Digite o nome do cupom" name="nomecupom">
+                                        <span class="invalid-feedback mensagem_nomecupom mensagemErro">
+
+                                        </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="tipoCupom">Tipo de cupom</label>
-                                        <select class="form-control" id="tipoCupom" name="tipoCupom">
+                                        <select class="form-control tipoCupom " name="tipoCupom">
                                             <option value="">Selecione o tipo do cupom </option>
                                             <option value="1">Frete</option>
                                             <option value="2">Produto</option>
                                             <option value="3">Produto e Frete</option>
                                         </select>
+                                        <span class="invalid-feedback mensagem_tipoCupom mensagemErro">
+
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="tipoValor">Tipo valor</label>
-                                        <select class="form-control" id="tipoValor" name="porcentagemOUvalorreal">
+                                        <select class="form-control  porcentagemOUvalorreal tipoValor"
+                                            name="porcentagemOUvalorreal">
                                             <option value="">Selecione</option>
                                             <option value="1">$ (valor em valor real)</option>
                                             <option value="2">% (valor em porcentagem)</option>
 
                                         </select>
+                                        <span class="invalid-feedback mensagem_porcentagemOUvalorreal mensagemErro">
+
+                                        </span>
+
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Valor do cupom</label>
-                                        <input type="text" class="form-control valor"
+                                        <input type="text" class="form-control  valorCupom"
                                             placeholder="Digite o valor do desconto" name="valorCupom" data-prefix="R$ ">
+                                        <span class="invalid-feedback mensagemErro mensagem_valorCupom">
+
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="nome">Quantidade de cupom</label>
-                                        <input type="number" class="form-control quantidade"
+                                        <input type="number" class="form-control  cupomQuantidade"
                                             placeholder="Digite a quantidade de cupons " name="cupomQuantidade">
+                                        <span class="invalid-feedback mensagemErro mensagem_cupomQuantidade">
+
+                                        </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Data de validade</label>
-                                        <input type="text" class="form-control data"
+                                        <input type="text" class="form-control  data validadeCupom"
                                             placeholder="Digite a data de validade do cupom" name="validadeCupom">
+                                        <span class="invalid-feedback mensagemErro mensagem_validadeCupom">
+
+                                        </span>
                                     </div>
                                 </div>
                                 <br>
@@ -134,6 +154,100 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="button" id="btnformAddCupom" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- MODAL EDITAR CUPOM --}}
+    <div class="modal fade" id="modalEditarCupom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Cupom<button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></h5>
+
+                </div>
+                <div class="modal-body" style="padding: 0%">
+                    <div class="col">
+                        <div class="view-cupom" id="ttttttt">
+                            <form id="formEditarCupom" method="POST" enctype="multipart/form-data">
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nomeCupom">Nome do Cupom</label>
+                                        <input type="text" class="form-control editnomecupom nomecupom"
+                                            placeholder="Digite o nome do cupom" name="nomecupom">
+                                        <span class="invalid-feedback editmensagem_nomecupom mensagemErro">
+
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="tipoCupom">Tipo de cupom</label>
+                                        <select class="form-control edittipoCupom tipoCupom" name="tipoCupom">
+                                            <option value="">Selecione o tipo do cupom </option>
+                                            <option value="1">Frete</option>
+                                            <option value="2">Produto</option>
+                                            <option value="3">Produto e Frete</option>
+                                        </select>
+                                        <span class="invalid-feedback editmensagem_tipoCupom mensagemErro">
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="tipoValor">Tipo valor</label>
+                                        <select
+                                            class="form-control  editporcentagemOUvalorreal porcentagemOUvalorreal tipoValor"
+                                            name="porcentagemOUvalorreal">
+                                            <option value="">Selecione</option>
+                                            <option value="1">$ (valor em valor real)</option>
+                                            <option value="2">% (valor em porcentagem)</option>
+
+                                        </select>
+                                        <span class="invalid-feedback editmensagem_porcentagemOUvalorreal mensagemErro">
+
+                                        </span>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Valor do cupom</label>
+                                        <input type="text" class="form-control editvalorCupom valorCupom"
+                                            placeholder="Digite o valor do desconto" name="valorCupom" data-prefix="R$ ">
+                                        <span class="invalid-feedback mensagemErro editmensagem_valorCupom">
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nome">Quantidade de cupom</label>
+                                        <input type="number" class="form-control editcupomQuantidade cupomQuantidade"
+                                            placeholder="Digite a quantidade de cupons " name="cupomQuantidade">
+                                        <span class="invalid-feedback mensagemErro editmensagem_cupomQuantidade">
+
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Data de validade</label>
+                                        <input type="text" class="form-control  editvalidadeCupom data validadeCupom"
+                                            placeholder="Digite a data de validade do cupom" name="validadeCupom">
+                                        <span class="invalid-feedback mensagemErro editmensagem_validadeCupom">
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" id="btnformEditarCupom" class="btn btn-primary">Editar</button>
                 </div>
             </div>
         </div>
@@ -249,7 +363,7 @@
     <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/configuracao/cupom.js') }}"></script>
     <script src="{{ asset('libs/jQuery-Mask/src/jquery.mask.min.js') }}"></script>
-    
+
 @endsection
 
 @endsection

@@ -53,8 +53,12 @@ Route::group(['prefix' => 'admin/config'], function () {
     //*******************************************************************************************\\
     //******************************ROTAS PARA O CUPOM********************************************\\
     //*********************************************************************************************\\
+    //Rota para fazer a validações dos campos
+    Route::any('/cupom/validacao', 'ConfiguracaoController@validacaoPersoanalizada')->name('validacaoPersoanalizada');
     Route::get('/cupom', 'ConfiguracaoController@viewCupom')->name('viewCupom');
     Route::post('/cupom/adicionar', 'ConfiguracaoController@addCupom')->name('addCupom');
-
+    Route::post('/cupom/visualizar', 'ConfiguracaoController@visualizarCupom')->name('visualizarCupom');
+    Route::post('/cupom/atualizar', 'ConfiguracaoController@atualizarCupom')->name('atualizarCupom');
+    Route::post('/cupom/delete', 'ConfiguracaoController@deleteCupom')->name('deleteCupom');
 });
 Auth::routes();
