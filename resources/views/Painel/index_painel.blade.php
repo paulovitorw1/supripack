@@ -319,6 +319,7 @@
     <script src="{{ asset('libs/bootstrap/js/price-range.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/js/main.js') }}"></script>
+    <script src="{{ asset('libs/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('libs/moment/moment.min.js') }}"></script>
     <script src="{{ asset('libs/moment/moment-with-locales.min.js') }}"></script>
 

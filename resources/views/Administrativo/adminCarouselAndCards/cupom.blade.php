@@ -160,6 +160,88 @@
     </div>
 
     {{-- MODAL EDITAR CUPOM --}}
+    <div class="modal fade" id="modalVisualizarCupom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Cupom<button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></h5>
+
+                </div>
+                <div class="modal-body" style="padding: 0%">
+                    <div class="col">
+                        <div class="view-cupom" id="ttttttt">
+                            <form id="formVisualizarCupom" method="POST" enctype="multipart/form-data">
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nomeCupom">Nome do Cupom</label>
+                                        <input type="text" class="form-control viewnomecupom nomecupom"
+                                            placeholder="Digite o nome do cupom" name="viewnomecupom">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="tipoCupom">Tipo de cupom</label>
+                                        <select class="form-control viewtipoCupom " name="viewtipoCupom">
+                                            <option value="">Selecione o tipo do cupom </option>
+                                            <option value="1">Frete</option>
+                                            <option value="2">Produto</option>
+                                            <option value="3">Produto e Frete</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="tipoValor">Tipo valor</label>
+                                        <select class="form-control  viewporcentagemOUvalorreal  etipoValor"
+                                            name="viewporcentagemOUvalorreal">
+                                            <option value="">Selecione</option>
+                                            <option value="1">$ (valor em valor real)</option>
+                                            <option value="2">% (valor em porcentagem)</option>
+
+                                        </select>
+
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Valor do cupom</label>
+                                        <input type="text" class="form-control viewvalorCupom evalorCupom"
+                                            placeholder="Digite o valor do desconto" name="viewvalorCupom"
+                                            data-prefix="R$ ">
+  
+                                    </div>
+                                </div>
+                                <div class="row modalAddRow">
+                                    <div class="col-sm-6">
+                                        <label for="nome">Quantidade de cupom</label>
+                                        <input type="number" class="form-control viewcupomQuantidade "
+                                            placeholder="Digite a quantidade de cupons " name="viewcupomQuantidade">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="nome">Data de validade</label>
+                                        <input type="text" class="form-control  viewvalidadeCupom data "
+                                            placeholder="Digite a data de validade do cupom" name="viewvalidadeCupom">
+
+                                    </div>
+                                    {{-- <div class="col-sm-12">
+                                        <label for="ativooudesativado" class="labelcheckbox">Pausar/Encerrar Cupom</label>
+                                        <input type="checkbox" name="" id="checkboxcupom">
+                                    </div> --}}
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- MODAL VISUALIZAR CUPOM --}}
     <div class="modal fade" id="modalEditarCupom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -179,20 +261,20 @@
                                     <div class="col-sm-6">
                                         <label for="nomeCupom">Nome do Cupom</label>
                                         <input type="text" class="form-control editnomecupom nomecupom"
-                                            placeholder="Digite o nome do cupom" name="nomecupom">
-                                        <span class="invalid-feedback editmensagem_nomecupom mensagemErro">
+                                            placeholder="Digite o nome do cupom" name="editnomecupom">
+                                        <span class="invalid-feedback editmensagem_editnomecupom mensagemErro">
 
                                         </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="tipoCupom">Tipo de cupom</label>
-                                        <select class="form-control edittipoCupom tipoCupom" name="tipoCupom">
+                                        <select class="form-control edittipoCupom " name="edittipoCupom">
                                             <option value="">Selecione o tipo do cupom </option>
                                             <option value="1">Frete</option>
                                             <option value="2">Produto</option>
                                             <option value="3">Produto e Frete</option>
                                         </select>
-                                        <span class="invalid-feedback editmensagem_tipoCupom mensagemErro">
+                                        <span class="invalid-feedback editmensagem_edittipoCupom mensagemErro">
 
                                         </span>
                                     </div>
@@ -200,24 +282,24 @@
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="tipoValor">Tipo valor</label>
-                                        <select
-                                            class="form-control  editporcentagemOUvalorreal porcentagemOUvalorreal tipoValor"
-                                            name="porcentagemOUvalorreal">
+                                        <select class="form-control  editporcentagemOUvalorreal  tipoValor"
+                                            name="editporcentagemOUvalorreal">
                                             <option value="">Selecione</option>
                                             <option value="1">$ (valor em valor real)</option>
                                             <option value="2">% (valor em porcentagem)</option>
 
                                         </select>
-                                        <span class="invalid-feedback editmensagem_porcentagemOUvalorreal mensagemErro">
+                                        <span class="invalid-feedback editmensagem_editporcentagemOUvalorreal mensagemErro">
 
                                         </span>
 
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Valor do cupom</label>
-                                        <input type="text" class="form-control editvalorCupom valorCupom"
-                                            placeholder="Digite o valor do desconto" name="valorCupom" data-prefix="R$ ">
-                                        <span class="invalid-feedback mensagemErro editmensagem_valorCupom">
+                                        <input type="text" class="form-control editvalorCupom "
+                                            placeholder="Digite o valor do desconto" name="editvalorCupom"
+                                            data-prefix="R$ ">
+                                        <span class="invalid-feedback mensagemErro editmensagem_editvalorCupom">
 
                                         </span>
                                     </div>
@@ -225,20 +307,24 @@
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="nome">Quantidade de cupom</label>
-                                        <input type="number" class="form-control editcupomQuantidade cupomQuantidade"
-                                            placeholder="Digite a quantidade de cupons " name="cupomQuantidade">
-                                        <span class="invalid-feedback mensagemErro editmensagem_cupomQuantidade">
+                                        <input type="number" class="form-control editcupomQuantidade "
+                                            placeholder="Digite a quantidade de cupons " name="editcupomQuantidade">
+                                        <span class="invalid-feedback mensagemErro editmensagem_editcupomQuantidade">
 
                                         </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Data de validade</label>
-                                        <input type="text" class="form-control  editvalidadeCupom data validadeCupom"
-                                            placeholder="Digite a data de validade do cupom" name="validadeCupom">
-                                        <span class="invalid-feedback mensagemErro editmensagem_validadeCupom">
+                                        <input type="text" class="form-control  editvalidadeCupom data "
+                                            placeholder="Digite a data de validade do cupom" name="editvalidadeCupom">
+                                        <span class="invalid-feedback mensagemErro editmensagem_editvalidadeCupom">
 
                                         </span>
                                     </div>
+                                    {{-- <div class="col-sm-12">
+                                        <label for="ativooudesativado" class="labelcheckbox">Pausar/Encerrar Cupom</label>
+                                        <input type="checkbox" name="" id="checkboxcupom">
+                                    </div> --}}
                                 </div>
                                 <br>
                             </form>
@@ -252,100 +338,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal EDITAR -->
-    <div class="modal fade" id="modalEditItemCarousel" tabindex="-1" role="dialog" aria-labelledby="modalEditItemCarousel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Imagens<button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button></h5>
-
-                </div>
-                <div class="modal-body" style="padding: 0;">
-                    <form id="formAdd" method="POST" action="" enctype="multipart/form-data">
-                        <br>
-                        <div class="container-fluid">
-                            <div class="row rowPreviwEdit">
-
-
-
-                            </div><!-- row -->
-                        </div><!-- container -->
-                        <br>
-                    </form>
-                    {{-- <div id="similar-product" class="carousel slide"
-                        data-ride="carousel">
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                        alt=""></a>
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar2.jpg') }}"
-                                        alt=""></a>
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                        alt=""></a>
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                        alt=""></a>
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                        alt=""></a>
-                                <a href=""><img class="img-add" src="{{ asset('img/product-details/similar1.jpg') }}"
-                                        alt=""></a>
-
-                            </div>
-
-
-                        </div>
-
-                    </div> --}}
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" id="btnformEditar" class="btn btn-primary">Editar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- FIM MODEL EDIT CAROUSEL --}}
-    <!-- Modal APGAR -->
-    <div class="modal fade" id="modalApagarItemCarousel" tabindex="-1" role="dialog"
-        aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLongTitle">Deletar Imagens<button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button></h5>
-
-                </div>
-                <div class="modal-body" style="padding: 0;">
-                    <form id="formcarouselPreviwDelete" method="POST" action="" enctype="multipart/form-data">
-                        <br>
-                        <div class="container-fluid">
-                            <div class="row rowPreviwEdit">
-
-
-
-                            </div><!-- row -->
-                        </div><!-- container -->
-                        <br>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" id="btnformDelte" class="btn btn-primary">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- FIM MODEL EDIT CAROUSEL --}}
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/config.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cupom.css') }}">

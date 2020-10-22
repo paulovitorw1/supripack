@@ -190,6 +190,7 @@ class ConfiguracaoController extends Controller
 
         if ($request->porcentagemOUvalorreal == 1) {
             $valorCupom = preg_replace('/[^0-9]/', '', substr($request->valorCupom, 0, -2));
+            
         } else {
             //
             $valorCupom = str_replace(',', '.', substr($request->valorCupom, 0, -1));
@@ -250,14 +251,31 @@ class ConfiguracaoController extends Controller
     }
     public function atualizarCupom(Request $request)
     {
+        $dataValidadeCupomMysql = null;
+        $valorCupom = null;
+
+        if ($request->editporcentagemOUvalorreal == 1) {
+            $valorCupom = preg_replace('/[^0-9]/', '', substr($request->editvalorCupom, 0, -2));
+        } else {
+            //
+            $valorCupom = str_replace(',', '.', substr($request->editvalorCupom, 0, -1));
+        }
+
+        // $dataddd = date_format('Y-m-d H:i:s', strtotime());
+        if ($request->editvalidadeCupom != null) {
+            $dataValidadeCupomMysql = DateTime::createFromFormat('d/m/Y', $request->editvalidadeCupom);
+            $dataValidadeCupomMysql->format('Y-m-d');
+        }
+        //Verificando se o nome do cupom digitado já existe na base de dados
+        $consultaVerifcupom = DB::select('SELECT nome_cupom FROM e_cupom WHERE nome_cupom = ? ', [$request->nomecupom]);
         //VALIDANDO E PASSANDO AS REGAS
-        $validacaoRegras = [
-            'tipoCupom' => 'required',
-            'nomecupom' => 'required',
-            'porcentagemOUvalorreal' => 'required',
-            'valorCupom' => 'required',
-            'cupomQuantidade' => 'required',
-            'validadeCupom' => 'required',
+        $regrasValidacao = [
+            'edittipoCupom' => 'required',
+            'editnomecupom' => 'required',
+            'editporcentagemOUvalorreal' => 'required',
+            'editvalorCupom' => 'required',
+            'editcupomQuantidade' => 'required',
+            'editvalidadeCupom' => 'required',
 
         ];
         //PERSONALIZANDO AS MENSAGENS DE ERRO
@@ -266,18 +284,25 @@ class ConfiguracaoController extends Controller
             'required' => 'O campo :attribute é obrigatório.',
             // /*PERSONALIZANDO*/
             // //PESSOA FÍSICA
-            'porcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
-            'nomecupom.required' => 'O campo nome do cupom é obrigatorio.',
-            'cupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
+            'editporcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
+            'edittipoCupom.required' => 'O campo nome do cupom é obrigatorio.',
+            'editcupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
 
         ];
-        $this->validate($request, $validacaoRegras, $mensagensPersonalizada);
+        $this->validate($request, $regrasValidacao, $mensagensPersonalizada);
 
         $idCupomEdite = $request->idCupomEdit;
         $editarcupom = Cupom::find($idCupomEdite);
-        // $editarcupom->status = 2;
-        // $editarcupom->status_uso = 3;
-        // $editarcupom->update();
+        $editarcupom->e_id_usuario_editCupom = 2;
+        $editarcupom->tipo_cupom = $request->edittipoCupom;
+        $editarcupom->nome_cupom = strtoupper($request->editnomecupom);
+        $editarcupom->porcentagemOUvalorreal = $request->editporcentagemOUvalorreal;
+        $editarcupom->valor_cupom = $valorCupom;
+        $editarcupom->cupom_quantidade = $request->editcupomQuantidade;
+        $editarcupom->data_validade = $dataValidadeCupomMysql;
+
+        $editarcupom->update();
+
 
         return response()->json($editarcupom);
     }

@@ -1,5 +1,5 @@
 var table;
-var url;
+var idCupomEditar;
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -27,10 +27,18 @@ $(document).ready(function () {
         // "columnDefs": [
         //     { className: "cart_delete", "targets": [6] }
         // ],
-        columns: [
-            { data: 'e_id_cupom' },
-            { data: 'nome_cupom' },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
+        columns: [{
+                data: 'e_id_cupom'
+            },
+            {
+                data: 'nome_cupom'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            }
 
         ],
         //Traduzindo a Tabela para o PORTUGUÊS
@@ -64,23 +72,45 @@ $(document).ready(function () {
 
     maskInput();
 });
+
 function maskInput() {
     //Masks
     $('.data').mask('00/00/0000');
-    $('.valorCupom').mask('0.000,00', { reverse: true });
+    $('.valorCupom').mask('0.000,00', {
+        reverse: true
+    });
     $('.quantidade').mask('0000');
 }
 //Mudando a mascara de tipo do cupom
 $('.tipoValor').change(function () {
     if ($(this).val() == 1) {
         $('.valorCupom').val('');
-        $('.valorCupom').mask('0.000,00', { reverse: true });
+        $('.valorCupom').mask('0.000,00', {
+            reverse: true
+        });
     } else {
         $('.valorCupom').val('');
-        $('.valorCupom').mask('000,00%', { reverse: true });
+        $('.valorCupom').mask('000,00%', {
+            reverse: true
+        });
 
     }
 });
+$('.editporcentagemOUvalorreal').change(function () {
+    if ($(this).val() == 1) {
+        $('.editvalorCupom').val('');
+        $('.editvalorCupom').mask('0.000,00', {
+            reverse: true
+        });
+    } else {
+        $('.editvalorCupom').val('');
+        $('.editvalorCupom').mask('000,00%', {
+            reverse: true
+        });
+
+    }
+});
+
 function addCupom() {
     //Resetando os dados
     $('#formAddCupom').each(function () {
@@ -93,7 +123,52 @@ function addCupom() {
 
 }
 //Visualizando o cupom
+function viewCupom(idCupomview) {
+    $.ajax({
+        type: "POST",
+        url: "/admin/config/cupom/visualizar",
+        data: {
+            idCupomEdit: idCupomview
+        },
+        dataType: "JSON",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data) {
+            if ($('.tipoValor').val() == 1) {
+                $('.editvalorCupom').val('');
+                $('.editvalorCupom').mask('0.000,00', {
+                    reverse: true
+                });
+            } else {
+                $('.editvalorCupom').val('');
+                $('.editvalorCupom').mask('000,00%', {
+                    reverse: true
+                });
+
+            }
+            $('.viewnomecupom').val(data[0].nome_cupom);
+            $('.viewtipoCupom').val(data[0].tipo_cupom);
+            $('.viewporcentagemOUvalorreal').val(data[0].porcentagemOUvalorreal);
+            $('.viewvalorCupom').val(data[0].valor_cupom);
+            $('.viewcupomQuantidade').val(data[0].cupom_quantidade);
+            $('.viewvalidadeCupom').val(moment(data[0].data_validade).format('L'));
+
+
+            $("#modalVisualizarCupom .form-control").each(function () {
+                $(this).attr("readonly", true);
+                $(this).attr("disabled", true);
+            });
+            $('#modalVisualizarCupom').modal('show');
+        },
+        error: function (erros) {
+
+        }
+    });
+}
+//Visualizando o cupom
 function editarCupom(idCupomEdit) {
+    idCupomEditar = idCupomEdit;
     $.ajax({
         type: "POST",
         url: "/admin/config/cupom/visualizar",
@@ -106,11 +181,15 @@ function editarCupom(idCupomEdit) {
         },
         success: function (data) {
             if ($('.tipoValor').val() == 1) {
-                $('.valorCupom').val('');
-                $('.valorCupom').mask('0.000,00', { reverse: true });
+                $('.editvalorCupom').val('');
+                $('.editvalorCupom').mask('0.000,00', {
+                    reverse: true
+                });
             } else {
-                $('.valorCupom').val('');
-                $('.valorCupom').mask('000,00%', { reverse: true });
+                $('.editvalorCupom').val('');
+                $('.editvalorCupom').mask('000,00%', {
+                    reverse: true
+                });
 
             }
             $('.editnomecupom').val(data[0].nome_cupom);
@@ -122,7 +201,8 @@ function editarCupom(idCupomEdit) {
 
 
             $('#modalEditarCupom').modal('show');
-        }, error: function (erros) {
+        },
+        error: function (erros) {
 
         }
     });
@@ -159,7 +239,8 @@ function deleteCupom(idCupom) {
                     )
                 }
             })
-        }, error: function (erros) {
+        },
+        error: function (erros) {
 
         }
     });
@@ -169,7 +250,9 @@ function deleteCupom(idCupom) {
 //Editando um cupom
 $('#btnformEditarCupom').click(function (e) {
     e.preventDefault();
-    var formDataa = new FormData($("#formEditarCupom form")[0]);
+    var formDataa = new FormData($("#modalEditarCupom form")[0]);
+    formDataa.append('idCupomEdit', idCupomEditar);
+
     // $.ajax({
     //     type: "POST",
     //     url: "/admin/config/cupom/validacao",
@@ -192,10 +275,11 @@ $('#btnformEditarCupom').click(function (e) {
                 timer: 1500
             });
             setTimeout(() => {
-                $("#modalAddCupom").modal('hide');
+                $("#modalEditarCupom").modal('hide');
                 table.ajax.reload();
             }, 1500);
-        }, error: function (errros) {
+        },
+        error: function (errros) {
             var jsonErros = errros.responseJSON.errors
             $.each(jsonErros, function (indexInArray, valueOfElement) {
                 $('.editmensagem_' + indexInArray).text(valueOfElement);
@@ -257,7 +341,8 @@ $('#btnformAddCupom').click(function (e) {
                 $("#modalAddCupom").modal('hide');
                 table.ajax.reload();
             }, 1500);
-        }, error: function (errros) {
+        },
+        error: function (errros) {
             var jsonErros = errros.responseJSON.errors
             $.each(jsonErros, function (indexInArray, valueOfElement) {
                 $('.mensagem_' + indexInArray).text(valueOfElement);
@@ -289,7 +374,3 @@ $('#btnformAddCupom').click(function (e) {
     // });
 
 });
-
-
-
-

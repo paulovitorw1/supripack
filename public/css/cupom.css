@@ -26,3 +26,15 @@
 .mensagemErro {
     color: #dc3545 !important;
 }
+
+.labelcheckbox {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 1%;
+}
+
+#checkboxcupom {
+    display: block;
+    margin: 0 auto;
+}
