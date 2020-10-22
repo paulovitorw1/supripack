@@ -27,6 +27,7 @@ Route::group(['prefix' => 'inicial'], function () {
 Route::group(['prefix' => 'inicial/carrinho'], function () {
     Route::get('/', 'CarrinhoController@indexCarrinho')->name('indexCarrinho');
     Route::post('/lista/produto', 'CarrinhoController@listaProduto')->name('listaProduto');
+    Route::post('/cupom', 'CarrinhoController@consultaCupom')->name('consultaCupom');
 });
 //Tela Inicial
 //

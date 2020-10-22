@@ -16,7 +16,7 @@ class CarrinhoController extends Controller
     {
         return view('Cliente.PaginaInicial.carrinho');
     }
-
+    //LISTANDO OS PRODUTOS
     public function listaProduto(Request $request)
     {
         $arrayIDsProdutos = $request->idProdutos;
@@ -61,5 +61,22 @@ class CarrinhoController extends Controller
 
         // ->make(true);
         // return response()->json($arrayProdutos);
+    }
+    public function consultaCupom(Request $request)
+    {
+        $nomeCupom = strtoupper($request->nomeCupom);
+        $responseRetorno = array();
+        $consultaCupom = DB::select('SELECT * FROM e_cupom WHERE e_cupom.nome_cupom = ? AND e_cupom.cupom_quantidade >= 1 AND e_cupom.status = 1', [$nomeCupom]);
+        if ($consultaCupom != null) {
+            if ($consultaCupom[0]->status_uso != 3) {
+                return response()->json($consultaCupom);
+            } else {
+                $responseErro['cupomErro'] = 'Cupom não exite !';
+                return response()->json($responseErro);
+            }
+        } else {
+            $responseErro['cupomErro'] = 'Cupom não exite !';
+            return response()->json($responseErro);
+        }
     }
 }

@@ -1,5 +1,7 @@
 var table;
 var idCupomEditar;
+var dateRegex = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
+
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -79,7 +81,10 @@ function maskInput() {
     $('.valorCupom').mask('0.000,00', {
         reverse: true
     });
-    $('.quantidade').mask('0000');
+
+    $('.cupomQuantidade').mask('0000');
+    $('.editcupomQuantidade').mask('0000');
+
 }
 //Mudando a mascara de tipo do cupom
 $('.tipoValor').change(function () {
@@ -135,7 +140,8 @@ function viewCupom(idCupomview) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {
-            if ($('.tipoValor').val() == 1) {
+            maskInput();
+            if ($('.etipoValor').val() == 1) {
                 $('.editvalorCupom').val('');
                 $('.editvalorCupom').mask('0.000,00', {
                     reverse: true
@@ -180,25 +186,24 @@ function editarCupom(idCupomEdit) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {
-            if ($('.tipoValor').val() == 1) {
-                $('.editvalorCupom').val('');
-                $('.editvalorCupom').mask('0.000,00', {
-                    reverse: true
-                });
-            } else {
-                $('.editvalorCupom').val('');
-                $('.editvalorCupom').mask('000,00%', {
-                    reverse: true
-                });
+            console.log(data);
 
-            }
             $('.editnomecupom').val(data[0].nome_cupom);
             $('.edittipoCupom').val(data[0].tipo_cupom);
             $('.editporcentagemOUvalorreal').val(data[0].porcentagemOUvalorreal);
             $('.editvalorCupom').val(data[0].valor_cupom);
             $('.editcupomQuantidade').val(data[0].cupom_quantidade);
             $('.editvalidadeCupom').val(moment(data[0].data_validade).format('L'));
+            if ($('.eetipoValor').val() == 1) {
+                $('.editvalorCupom').mask('0.000,00', {
+                    reverse: true
+                });
+            } else {
+                $('.editvalorCupom').mask('000,00%', {
+                    reverse: true
+                });
 
+            }
 
             $('#modalEditarCupom').modal('show');
         },
@@ -294,39 +299,58 @@ $('#btnformEditarCupom').click(function (e) {
 $('#btnformAddCupom').click(function (e) {
     e.preventDefault();
     var formDataa = new FormData($("#modalAddCupom form")[0]);
+    var dataAtualiza = dateRegex.test($("#validadeCupom").val());
+    if (dataAtualiza == true) {
+        $.ajax({
+            type: "POST",
+            url: "/admin/config/cupom/adicionar",
+            data: formDataa,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso',
+                    text: 'Cupom cadastrado com sucesso!',
+                    timer: 1500
+                });
+                setTimeout(() => {
+                    $("#modalAddCupom").modal('hide');
+                    table.ajax.reload();
+                }, 1500);
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/config/cupom/adicionar",
-        data: formDataa,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Sucesso',
-                text: 'Cupom cadastrado com sucesso!',
-                timer: 1500
-            });
-            setTimeout(() => {
-                $("#modalAddCupom").modal('hide');
-                table.ajax.reload();
-            }, 1500);
-        },
-        error: function (errros) {
-            var jsonErros = errros.responseJSON.errors
-            $.each(jsonErros, function (indexInArray, valueOfElement) {
-                $('.mensagem_' + indexInArray).text(valueOfElement);
-                $('.' + indexInArray).addClass('inputError');
-                $('.' + indexInArray).click(function (e) {
-                    $('.mensagem_' + indexInArray).text('');
-                    $('.' + indexInArray).removeClass('inputError');
+            },
+            error: function (errros) {
+                var jsonErros = errros.responseJSON.errors
+                $.each(jsonErros, function (indexInArray, valueOfElement) {
+                    $('.mensagem_' + indexInArray).text(valueOfElement);
+                    $('.' + indexInArray).addClass('inputError');
+                    $('.' + indexInArray).click(function (e) {
+                        $('.mensagem_' + indexInArray).text('');
+                        $('.' + indexInArray).removeClass('inputError');
 
+
+                    });
 
                 });
+            }
+        });
+    } else {
+        $('.mensagem_validadeCupom').text('A data digitada não é válida !');
+        $('#validadeCupom').addClass('inputError');
+        $('#validadeCupom').click(function (e) {
+            $('.mensagem_validadeCupom').text('');
+            $('#validadeCupom').removeClass('inputError');
 
-            });
-        }
-    });
+
+        });
+        // Swal.fire({
+        //     position: 'center',
+        //     icon: 'error',
+        //     title: 'A data digitada não é válida !',
+        //     showConfirmButton: true
+        // });
+    }
+
 
 });

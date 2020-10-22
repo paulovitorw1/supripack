@@ -270,7 +270,18 @@
                                 <input type="text">
                             </li>
                         </ul>
-                        <a class="btn btn-default update" href="">
+                        <button type="button" class="btn btn-default update" id="aplicaCupom">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Aplicar</font>
+                            </font>
+                        </button>
+                        {{-- <button type="button" class="btn btn-default check_out">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Obter Cotações</font>
+                            </font>
+                        </button> --}}
+
+                        {{-- <a class="btn btn-default update" href="">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Obter Cotações</font>
                             </font>
@@ -279,7 +290,7 @@
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Continuar</font>
                             </font>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="col-sm-6">

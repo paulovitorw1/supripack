@@ -9,6 +9,10 @@
     padding-left: 10px;
 }
 
+#inputCupom {
+    text-transform: uppercase;
+}
+
 .cart_delete {
     display: revert;
     margin-right: -12px;

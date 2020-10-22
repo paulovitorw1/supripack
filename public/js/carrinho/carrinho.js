@@ -85,6 +85,24 @@ function getProdutoStorange() {
         // });
     }
 }
+$("#aplicaCupom").click(function (e) {
+    e.preventDefault();
+    var nomeCupom = $("#inputCupom").val();
+    $.ajax({
+        type: "POST",
+        url: "/inicial/carrinho/cupom",
+        data: {
+            nomeCupom
+        },
+        dataType: "JSON",
+        success: function (response) {
+            console.log(response);
+        }, error: function (erros) {
+
+        }
+    });
+
+});
 //CUPOM 
 $("#checkboxcupom").change(function (e) {
     // alert("ddasda");

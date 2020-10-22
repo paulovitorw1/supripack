@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="nome">Data de validade</label>
-                                        <input type="text" class="form-control  data validadeCupom"
+                                        <input type="text" class="form-control  data validadeCupom" id="validadeCupom"
                                             placeholder="Digite a data de validade do cupom" name="validadeCupom">
                                         <span class="invalid-feedback mensagemErro mensagem_validadeCupom">
 
@@ -159,7 +159,7 @@
         </div>
     </div>
 
-    {{-- MODAL EDITAR CUPOM --}}
+    {{-- MODAL VISUALIZAR CUPOM --}}
     <div class="modal fade" id="modalVisualizarCupom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -282,7 +282,7 @@
                                 <div class="row modalAddRow">
                                     <div class="col-sm-6">
                                         <label for="tipoValor">Tipo valor</label>
-                                        <select class="form-control  editporcentagemOUvalorreal  tipoValor"
+                                        <select class="form-control  editporcentagemOUvalorreal  eetipoValor"
                                             name="editporcentagemOUvalorreal">
                                             <option value="">Selecione</option>
                                             <option value="1">$ (valor em valor real)</option>

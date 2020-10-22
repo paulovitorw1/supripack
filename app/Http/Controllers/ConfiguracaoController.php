@@ -189,8 +189,9 @@ class ConfiguracaoController extends Controller
         $valorCupom = null;
 
         if ($request->porcentagemOUvalorreal == 1) {
-            $valorCupom = preg_replace('/[^0-9]/', '', substr($request->valorCupom, 0, -2));
-            
+            // $valorCupom = preg_replace('/[^0-9]/', '', substr($request->valorCupom, 0, -2));
+            $removeVp = str_replace('.', '', $request->editvalorCupom);
+            $valorCupom = str_replace(',', '.', $removeVp);
         } else {
             //
             $valorCupom = str_replace(',', '.', substr($request->valorCupom, 0, -1));
@@ -255,7 +256,10 @@ class ConfiguracaoController extends Controller
         $valorCupom = null;
 
         if ($request->editporcentagemOUvalorreal == 1) {
-            $valorCupom = preg_replace('/[^0-9]/', '', substr($request->editvalorCupom, 0, -2));
+            // $valorCupom = preg_replace('/[^0-9]/', '', substr($request->editvalorCupom, 0, -2));
+            $removeVp = str_replace('.', '', $request->editvalorCupom);
+            $valorCupom = str_replace(',', '.', $removeVp);
+
         } else {
             //
             $valorCupom = str_replace(',', '.', substr($request->editvalorCupom, 0, -1));
