@@ -28,17 +28,17 @@ $(document).ready(function () {
         //     { className: "cart_delete", "targets": [6] }
         // ],
         columns: [{
-                data: 'e_id_cupom'
-            },
-            {
-                data: 'nome_cupom'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
-            }
+            data: 'e_id_cupom'
+        },
+        {
+            data: 'nome_cupom'
+        },
+        {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false
+        }
 
         ],
         //Traduzindo a Tabela para o PORTUGUÊS
@@ -253,14 +253,6 @@ $('#btnformEditarCupom').click(function (e) {
     var formDataa = new FormData($("#modalEditarCupom form")[0]);
     formDataa.append('idCupomEdit', idCupomEditar);
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/admin/config/cupom/validacao",
-    //     data: formDataa,
-    //     contentType: false,
-    //     processData: false,
-    //     success: function (data) {
-    //         console.log(data);
     $.ajax({
         type: "POST",
         url: "/admin/config/cupom/atualizar",
@@ -294,21 +286,7 @@ $('#btnformEditarCupom').click(function (e) {
             });
         }
     });
-    // }, error: function (errros) {
-    //     var jsonErros = errros.responseJSON.errors
-    //     $.each(jsonErros, function (indexInArray, valueOfElement) {
-    //         $('.mensagem_' + indexInArray).text(valueOfElement);
-    //         $('.' + indexInArray).addClass('inputError');
-    //         $('.' + indexInArray).click(function (e) {
-    //             $('.mensagem_' + indexInArray).text('');
-    //             $('.' + indexInArray).removeClass('inputError');
 
-
-    //         });
-
-    //     });
-    // }
-    // });
 
 });
 
@@ -316,14 +294,7 @@ $('#btnformEditarCupom').click(function (e) {
 $('#btnformAddCupom').click(function (e) {
     e.preventDefault();
     var formDataa = new FormData($("#modalAddCupom form")[0]);
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/admin/config/cupom/validacao",
-    //     data: formDataa,
-    //     contentType: false,
-    //     processData: false,
-    //     success: function (data) {
-    //         console.log(data);
+
     $.ajax({
         type: "POST",
         url: "/admin/config/cupom/adicionar",
@@ -357,20 +328,5 @@ $('#btnformAddCupom').click(function (e) {
             });
         }
     });
-    // }, error: function (errros) {
-    //     var jsonErros = errros.responseJSON.errors
-    //     $.each(jsonErros, function (indexInArray, valueOfElement) {
-    //         $('.mensagem_' + indexInArray).text(valueOfElement);
-    //         $('.' + indexInArray).addClass('inputError');
-    //         $('.' + indexInArray).click(function (e) {
-    //             $('.mensagem_' + indexInArray).text('');
-    //             $('.' + indexInArray).removeClass('inputError');
-
-
-    //         });
-
-    //     });
-    // }
-    // });
 
 });

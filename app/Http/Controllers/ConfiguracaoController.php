@@ -283,7 +283,6 @@ class ConfiguracaoController extends Controller
             //CAMPOS PADRÃO
             'required' => 'O campo :attribute é obrigatório.',
             // /*PERSONALIZANDO*/
-            // //PESSOA FÍSICA
             'editporcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
             'edittipoCupom.required' => 'O campo nome do cupom é obrigatorio.',
             'editcupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
@@ -340,33 +339,6 @@ class ConfiguracaoController extends Controller
             'porcentagemOUvalorreal.required' => 'O campo tipo valor é obrigatorio.',
             'nomecupom.required' => 'O campo nome do cupom é obrigatorio.',
             'cupomQuantidade.required' => 'O campo quantidade de cupom é obrigatorio.',
-
-            // 'cpf.required_if' => 'O campo CPF é obrigatorio.',
-            // 'identidade.required_if' => 'O campo identidade é obrigatorio.',
-            // 'orgEmissor.required_if' => 'O campo Órgão emissor é obrigatorio.',
-            // 'naturalidade.required_if' => 'O campo naturalidade é obrigatorio.',
-            // 'uf_emissor.required_if' => 'O campo UF é obrigatorio.',
-            // 'data_de_nascimento.required_if' => 'O campo data de nascimento é obrigatorio.',
-            // 'sexo.required_if' => 'O campo sexo é obrigatorio.',
-            // 'naturalidade.required_if' => 'O campo naturalidade é obrigatorio.',
-            // //PESSOA JURÍDICA
-            // 'razaoSocial.required_if' => 'O campo Razão Social é obrigatorio.',
-            // 'nome_fantasia.required_if' => 'O campo nome fantasia é obrigatorio.',
-            // 'cnpj.required_if' => 'O campo CNPJ é obrigatorio.',
-
-            // 'data_de_abertura.required_if' => 'O campo data de abertura é obrigatorio.',
-            // 'tipo_empresa.required_if' => 'O campo tipo de empresa é obrigatorio.',
-            // 'ramo.required_if' => 'O campo ramo é obrigatorio.',
-            // //REFERENCIA
-            // // 'nome_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
-            // // 'parentesco.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
-            // // 'telefone_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
-            // // 'endereco_referencia.*.required_with' => 'O campo nome referência é obrigatório quando parentesco / telefone referência / endereço referência está presente.',
-            // //BANCO
-            // 'nome_banco.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
-            // 'agencia.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
-            // 'conta.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
-            // 'tipo_conta.required_with' => 'O campo Nº conta é obrigatório quando nome Banco / Agência / Tipo de conta está presente.',
 
         ];
         $this->validate($request, $validacaoRegras, $mensagensPersonalizada);
