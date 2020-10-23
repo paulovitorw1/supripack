@@ -8,7 +8,7 @@
                 <div class="table-responsive">
                     <div class="form-row " id="grup_tableInputs">
                         <div class="left-sidebar">
-                            <h2>Configuração</h2>
+                            <h2>Produtos em destaque</h2>
 
                         </div>
                         {{-- <div class="form-group col-md-4 " id="divSelectTipo">
@@ -114,7 +114,8 @@
                                 </div>
                             </div>
                         </form>
-                        {{-- </div> --}}
+                        {{--
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     {{-- <button type="button" class="btn btn-primary">Save changes</button>

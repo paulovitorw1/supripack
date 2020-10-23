@@ -3,6 +3,12 @@
     <div class="product-details">
         <!--product-details-->
         <div class="col-sm-12">
+            <div class="form-row " id="grup_tableInputs">
+                <div class="left-sidebar">
+                    <h2>Slide/Carousel</h2>
+
+                </div>
+            </div>
             <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     @foreach ($consultaImagemCarusel as $item)
@@ -82,7 +88,8 @@
                             <form id="formUpload" method="POST" enctype="multipart/form-data">
                                 {{-- <div class="file"> --}}
                                     <input id="kv-explorer" type="file" id="inputfileCa" name="addImgCarousel[]" multiple>
-                                    {{-- </div> --}}
+                                    {{--
+                                </div> --}}
 
 
                                 <br>

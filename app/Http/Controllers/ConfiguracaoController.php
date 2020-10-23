@@ -190,7 +190,7 @@ class ConfiguracaoController extends Controller
 
         if ($request->porcentagemOUvalorreal == 1) {
             // $valorCupom = preg_replace('/[^0-9]/', '', substr($request->valorCupom, 0, -2));
-            $removeVp = str_replace('.', '', $request->editvalorCupom);
+            $removeVp = str_replace('.', '', $request->valorCupom);
             $valorCupom = str_replace(',', '.', $removeVp);
         } else {
             //
@@ -237,11 +237,11 @@ class ConfiguracaoController extends Controller
                 'cupom_quantidade' => $request->cupomQuantidade,
                 'data_validade' => $dataValidadeCupomMysql,
             ]);
+            return response()->json($addCupom);
         } else {
-            dd('CUPOM JÁ EXISTENTE');
+            $mensagemE['cupomErrro'] = 1;
+            return response()->json($mensagemE);
         }
-
-        return response()->json($addCupom);
     }
     public function visualizarCupom(Request $request)
     {
@@ -259,7 +259,6 @@ class ConfiguracaoController extends Controller
             // $valorCupom = preg_replace('/[^0-9]/', '', substr($request->editvalorCupom, 0, -2));
             $removeVp = str_replace('.', '', $request->editvalorCupom);
             $valorCupom = str_replace(',', '.', $removeVp);
-
         } else {
             //
             $valorCupom = str_replace(',', '.', substr($request->editvalorCupom, 0, -1));

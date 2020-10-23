@@ -204,6 +204,7 @@ function editarCupom(idCupomEdit) {
                 });
 
             }
+            $('#formEditarCupom .form-control').removeClass('inputError');
 
             $('#modalEditarCupom').modal('show');
         },
@@ -308,16 +309,35 @@ $('#btnformAddCupom').click(function (e) {
             processData: false,
             contentType: false,
             success: function (data) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sucesso',
-                    text: 'Cupom cadastrado com sucesso!',
-                    timer: 1500
-                });
-                setTimeout(() => {
-                    $("#modalAddCupom").modal('hide');
-                    table.ajax.reload();
-                }, 1500);
+                console.log(data);
+                if (data.cupomErrro == 1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Cupom já existe !',
+                        text: 'O nome do cupom digitado já existe!',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        text: 'Cupom cadastrado com sucesso!',
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        $("#modalAddCupom").modal('hide');
+                        table.ajax.reload();
+                    }, 1500);
+                }
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Sucesso',
+                //     text: 'Cupom cadastrado com sucesso!',
+                //     timer: 1500
+                // });
+                // setTimeout(() => {
+                //     $("#modalAddCupom").modal('hide');
+                //     table.ajax.reload();
+                // }, 1500);
 
             },
             error: function (errros) {

@@ -323,7 +323,23 @@ function addProdutoLocalStore(idProdutoStorage) {
         }
         // produtoStorage.push(arrayIdprodutos);
         // localStorage.setItem("produto", JSON.stringify(produtoStorage));
-        alert("Registro adicionado.");
+        // alert("Registro adicionado.");
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Produto adicionado ao carrinho!'
+        })
 
         var countProdlength = JSON.parse(localStorage.getItem("produto"));
         console.log(countProdlength);

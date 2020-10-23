@@ -7,7 +7,7 @@
                 <div class="table-responsive">
                     <div class="form-row " id="grup_tableInputs">
                         <div class="left-sidebar">
-                            <h2>Configuração</h2>
+                            <h2>CUPOM</h2>
 
                         </div>
                         {{-- <div class="form-group col-md-4 " id="divSelectTipo">
@@ -209,7 +209,7 @@
                                         <input type="text" class="form-control viewvalorCupom evalorCupom"
                                             placeholder="Digite o valor do desconto" name="viewvalorCupom"
                                             data-prefix="R$ ">
-  
+
                                     </div>
                                 </div>
                                 <div class="row modalAddRow">
