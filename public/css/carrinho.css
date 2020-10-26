@@ -40,3 +40,20 @@
 .displayNone {
     display: none;
 }
+
+.inputError {
+    border-color: #dc3545 !important;
+}
+
+.mensagemErro {
+    color: #dc3545 !important;
+}
+
+.inputSucesso {
+    border-color: #28a745;
+
+}
+
+.mensagemSucesso {
+    color: #28a745 !important;
+}

@@ -71,11 +71,11 @@ class CarrinhoController extends Controller
             if ($consultaCupom[0]->status_uso != 3) {
                 return response()->json($consultaCupom);
             } else {
-                $responseErro['cupomErro'] = 'Cupom não exite !';
+                $responseErro['cupomErro'] = 0;
                 return response()->json($responseErro);
             }
         } else {
-            $responseErro['cupomErro'] = 'Cupom não exite !';
+            $responseErro['cupomErro'] = 0;
             return response()->json($responseErro);
         }
     }

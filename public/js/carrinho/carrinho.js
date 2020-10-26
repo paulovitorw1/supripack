@@ -85,22 +85,76 @@ function getProdutoStorange() {
         // });
     }
 }
+
 $("#aplicaCupom").click(function (e) {
     e.preventDefault();
-    var nomeCupom = $("#inputCupom").val();
-    $.ajax({
-        type: "POST",
-        url: "/inicial/carrinho/cupom",
-        data: {
-            nomeCupom
-        },
-        dataType: "JSON",
-        success: function (response) {
-            console.log(response);
-        }, error: function (erros) {
 
-        }
-    });
+    var nomeCupom = $("#inputCupom").val();
+    if (nomeCupom.length < 4) {
+        $('.mensagem_nomecupom').text('O nome do cupom deve ter pelo menos 4 caracteres!');
+        $('#inputCupom').addClass('inputError');
+        $('.mensagem_nomecupom').addClass('mensagemErro');
+        //Removendo as class de erros quando houver um click
+        $('#inputCupom').click(function (e) {
+            $(this).removeClass('inputError');
+            $('.mensagem_nomecupom').removeClass('mensagemErro');
+            $('.mensagem_nomecupom').text('');
+
+        });
+
+    } else {
+        $('.valorCupom').empty('');
+        $('.valorCupom').append('R$');
+        // $('.valorCupom').mask('R$ 0.000,00', { reverse: true });
+
+        $('#inputCupom').removeClass('inputError');
+        $('.mensagem_nomecupom').removeClass('mensagemErro');
+        $('.mensagem_nomecupom').text('');
+        $.ajax({
+            type: "POST",
+            url: "/inicial/carrinho/cupom",
+            data: {
+                nomeCupom
+            },
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                if (response.cupomErro == 0) {
+                    $('.mensagem_nomecupom').text('Cupom invalido.');
+                    $('#inputCupom').addClass('inputError');
+                    $('.mensagem_nomecupom').addClass('mensagemErro');
+                    //Removendo as class de erros quando houver um click
+                    $('#inputCupom').click(function (e) {
+                        $(this).removeClass('inputError');
+                        $('.mensagem_nomecupom').removeClass('mensagemErro');
+                        $('.mensagem_nomecupom').text('');
+
+                    });
+                } else {
+                    $('.mensagem_nomecupom').text('Cupom aplicado com sucesso !');
+                    $('#inputCupom').addClass('inputSucesso');
+                    $('.mensagem_nomecupom').addClass('mensagemSucesso');
+
+                    $('.valorCupom').append(response[0].valor_cupom);
+                    $('.valorCupom').mask('R$ 0.000,00', { reverse: true });
+
+
+                }
+
+            }, error: function (erros) {
+                console.log(erros.cupomErro);
+                $('.mensagem_nomecupom').text(erros.cupomErro);
+                $('#inputCupom').addClass('inputError');
+                $('#inputCupom').click(function (e) {
+                    $(this).removeClass('inputError');
+                    $('.mensagem_nomecupom').text('');
+
+                });
+
+            }
+        });
+    }
+
 
 });
 //CUPOM 
@@ -108,9 +162,13 @@ $("#checkboxcupom").change(function (e) {
     // alert("ddasda");
     if (this.checked == true) {
         $('.divCupom').removeClass('displayNone');
+        $('#aplicaCupom').removeClass('displayNone');
         $('#inputCupom').val('');
+
     } else {
         $('.divCupom').addClass('displayNone');
+        $('#aplicaCupom').addClass('displayNone');
+
         $('#inputCupom').val('');
     }
 });

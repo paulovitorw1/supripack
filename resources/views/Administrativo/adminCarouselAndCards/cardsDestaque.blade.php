@@ -4,7 +4,6 @@
         <!--product-details-->
         <div class="col-sm-12">
             <div class="card-body">
-
                 <div class="table-responsive">
                     <div class="form-row " id="grup_tableInputs">
                         <div class="left-sidebar">

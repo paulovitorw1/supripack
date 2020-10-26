@@ -141,6 +141,9 @@
                                         </font>
                                     </label>
                                     <input type="text" class="form-control" name="inputCupom" id="inputCupom">
+                                    <span class="invalid-feedback mensagem_nomecupom">
+
+                                    </span>
                                 </div>
                             </li>
                             {{-- <li>
@@ -160,6 +163,12 @@
                                 </label>
                             </li> --}}
                         </ul>
+                        <button type="button" class="btn btn-default update displayNone" id="aplicaCupom">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Aplicar</font>
+                            </font>
+                        </button>
+                        <hr>
                         <ul class="user_info">
                             <li class="single_field">
                                 <label>
@@ -270,16 +279,12 @@
                                 <input type="text">
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-default update" id="aplicaCupom">
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">Aplicar</font>
-                            </font>
-                        </button>
-                        {{-- <button type="button" class="btn btn-default check_out">
+
+                        <button type="button" class="btn btn-default check_out">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">Obter Cotações</font>
                             </font>
-                        </button> --}}
+                        </button>
 
                         {{-- <a class="btn btn-default update" href="">
                             <font style="vertical-align: inherit;">
@@ -307,10 +312,10 @@
                             </li>
                             <li>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">Eco Tax </font>
+                                    <font style="vertical-align: inherit;">Cupom</font>
                                 </font><span>
                                     <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 2</font>
+                                        <font class="valorCupom" style="vertical-align: inherit;">R$ 0,00</font>
                                     </font>
                                 </span>
                             </li>
@@ -354,6 +359,8 @@
 @section('js')
     <script src="{{ asset('js/carrinho/carrinho.js') }}"></script>
     <script src="{{ asset('libs/DataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('libs/jQuery-Mask/src/jquery.mask.min.js') }}"></script>
+
 
 @endsection
 @endsection
