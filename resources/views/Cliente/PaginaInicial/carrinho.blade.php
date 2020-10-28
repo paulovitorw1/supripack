@@ -168,6 +168,11 @@
                                 <font style="vertical-align: inherit;">Aplicar</font>
                             </font>
                         </button>
+                        <button type="button" class="btn btn-danger update displayNone" id="removeCupom">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Remover cupom</font>
+                            </font>
+                        </button>
                         <hr>
                         <ul class="user_info">
                             <li class="single_field">
@@ -315,7 +320,8 @@
                                     <font style="vertical-align: inherit;">Cupom</font>
                                 </font><span>
                                     <font style="vertical-align: inherit;">
-                                        <font class="valorCupom" style="vertical-align: inherit;">R$ 0,00</font>
+                                        <font class="valorCupom" style="vertical-align: inherit;" data-idCupom="">R$ 0,00
+                                        </font>
                                     </font>
                                 </span>
                             </li>

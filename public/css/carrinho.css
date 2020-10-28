@@ -13,6 +13,10 @@
     text-transform: uppercase;
 }
 
+#removeCupom {
+    margin-left: 1% !important;
+}
+
 .cart_delete {
     display: revert;
     margin-right: -12px;
@@ -50,10 +54,14 @@
 }
 
 .inputSucesso {
-    border-color: #28a745;
-
+    border: 1px solid #28a745 !important;
 }
 
 .mensagemSucesso {
     color: #28a745 !important;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
 }

@@ -28,8 +28,8 @@ class CarrinhoController extends Controller
                 ->leftJoin('fotos', 'fotos.id_produto', '=', 'produtos.id')
                 ->where('produtos.id', [$idprod])
                 ->get();
-            foreach ($consultaProduto as $ddd) {
-                $collectionConsultaProd->push($ddd);
+            foreach ($consultaProduto as $valorConsulta) {
+                $collectionConsultaProd->push($valorConsulta);
             }
         }
 
@@ -52,15 +52,22 @@ class CarrinhoController extends Controller
                     </a>
                 </div>';
             })
-            ->addColumn('sssss', function ($collectionConsultaProd) {
+            ->addColumn('removeProduto', function ($collectionConsultaProd) {
                 return
                     '<a class="cart_quantity_delete" href="javascript:void(0)" onclick="removeProduto(' . $collectionConsultaProd->id . ');"><i class="fa fa-times"></i></a>';
             })
-            ->rawColumns(['action', 'sssss'])
+            ->addColumn('valorTotal', function ($collectionConsultaProd) {
+                return '<p class="valorTotal' . $collectionConsultaProd->id . '">' . $collectionConsultaProd->valor_uni_tributavel . '<p/>';
+            })
+            ->rawColumns(['action', 'valorTotal', 'removeProduto'])
             ->toJson();
 
         // ->make(true);
         // return response()->json($arrayProdutos);
+    }
+    public function editColunaDt(Request $request)
+    {
+        // $hshshsh = $request->
     }
     public function consultaCupom(Request $request)
     {

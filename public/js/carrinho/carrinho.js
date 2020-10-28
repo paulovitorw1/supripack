@@ -35,7 +35,17 @@ function getProdutoStorange() {
                 type: "POST",
             },
             "columnDefs": [
-                { className: "cart_delete", "targets": [6] }
+                //Class btn delete produto
+                { className: "cart_delete", "targets": [6] },
+                // { className: "valorTotalP", "targets": [5] },
+
+                //convertendo valores para moeda brasileira
+                {
+                    "render": function (data) {
+                        return parseFloat(data).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                    },
+                    "targets": [3]
+                }
             ],
             columns: [
                 { data: 'id' },
@@ -43,13 +53,24 @@ function getProdutoStorange() {
                 { data: 'descr' },
                 { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
-                { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
-                { data: 'sssss', name: 'sssss', orderable: false, searchable: false }
+                // { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
+                {
+                    'data': 'valorTotal',
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        console.log(oData);
+                        $(nTd).html(oData.valorTotal);
+                    }
+                },
+    
+                // { data: 'valorTotal', name: 'valorTotal', className: 'valorTotalP', orderable: false, searchable: false, defaultContent: "<i>Not set</i>" },
+                { data: 'removeProduto', name: 'removeProduto', orderable: false, searchable: false }
 
             ],
             //Traduzindo a Tabela para o PORTUGUÊS
             "bJQueryUI": true,
             "oLanguage": {
+                "decimal": ",",
+                "thousands": ".",
                 "lengthChange": false,
                 "pageLength": 10,
                 "sProcessing": "Processando...",
@@ -88,9 +109,11 @@ function getProdutoStorange() {
 
 $("#aplicaCupom").click(function (e) {
     e.preventDefault();
-
+    var valorCupom;
     var nomeCupom = $("#inputCupom").val();
     if (nomeCupom.length < 4) {
+        $('#inputCupom').removeClass('inputSucesso');
+        $('.mensagem_nomecupom').removeClass('mensagemSucesso');
         $('.mensagem_nomecupom').text('O nome do cupom deve ter pelo menos 4 caracteres!');
         $('#inputCupom').addClass('inputError');
         $('.mensagem_nomecupom').addClass('mensagemErro');
@@ -103,9 +126,7 @@ $("#aplicaCupom").click(function (e) {
         });
 
     } else {
-        $('.valorCupom').empty('');
-        $('.valorCupom').append('R$');
-        // $('.valorCupom').mask('R$ 0.000,00', { reverse: true });
+        $('.valorCupom').text('R$ 0,00');
 
         $('#inputCupom').removeClass('inputError');
         $('.mensagem_nomecupom').removeClass('mensagemErro');
@@ -120,6 +141,8 @@ $("#aplicaCupom").click(function (e) {
             success: function (response) {
                 console.log(response);
                 if (response.cupomErro == 0) {
+                    $('#inputCupom').removeClass('inputSucesso');
+                    $('.mensagem_nomecupom').removeClass('mensagemSucesso');
                     $('.mensagem_nomecupom').text('Cupom invalido.');
                     $('#inputCupom').addClass('inputError');
                     $('.mensagem_nomecupom').addClass('mensagemErro');
@@ -134,10 +157,39 @@ $("#aplicaCupom").click(function (e) {
                     $('.mensagem_nomecupom').text('Cupom aplicado com sucesso !');
                     $('#inputCupom').addClass('inputSucesso');
                     $('.mensagem_nomecupom').addClass('mensagemSucesso');
+                    $('#inputCupom').click(function (e) {
+                        $(this).addClass('inputCupom');
+                        $('.mensagem_nomecupom').addClass('mensagemSucesso');
+                        $('.mensagem_nomecupom').text('Cupom aplicado com sucesso !');
 
-                    $('.valorCupom').append(response[0].valor_cupom);
-                    $('.valorCupom').mask('R$ 0.000,00', { reverse: true });
 
+                    });
+                    //Convertendo valor do cupom para moeda Brasileira
+                    valorCupom = parseFloat(response[0].valor_cupom).toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    });
+                    //Passando o valor do cupom com a maracara de real 
+                    $('.valorCupom').text(valorCupom);
+                    //Passando o ID do cupom
+                    $(".valorCupom").attr('data-idCupom', response[0].e_id_cupom);
+                    //Mostrando botton de remover cupom
+                    $('#removeCupom').removeClass('displayNone');
+                    //
+                    $('#removeCupom').click(function (e) {
+                        $(".valorCupom").attr('data-idCupom', '');
+                        $('#inputCupom').removeClass('inputSucesso');
+                        $('.mensagem_nomecupom').removeClass('mensagemSucesso');
+                        $('.mensagem_nomecupom').text('');
+                        $(this).addClass('displayNone');
+                        //
+                        $('#inputCupom').click(function (e) {
+                            $(this).addClass('inputCupom');
+                            $('.mensagem_nomecupom').text('');
+
+
+                        });
+                    });
 
                 }
 
@@ -168,6 +220,8 @@ $("#checkboxcupom").change(function (e) {
     } else {
         $('.divCupom').addClass('displayNone');
         $('#aplicaCupom').addClass('displayNone');
+        $('#removeCupom').addClass('displayNone');
+
 
         $('#inputCupom').val('');
     }
@@ -175,17 +229,20 @@ $("#checkboxcupom").change(function (e) {
 
 function quantdd(classId) {
     var valorAtual = Number($(".valor" + classId).val());
-    var ssjssjs = Number(++valorAtual);
+    var valNumreal = Number(++valorAtual);
 
-    var novoValor = $(".valor" + classId).val(ssjssjs);
+    var novoValor = $(".valor" + classId).val(valNumreal);
+    var tesste = $(novoValor).val();
+
+    console.log($('.valorTotalP').text());
+
 
 }
 function quantRemove(classId) {
     var valorAtual = Number.parseInt($(".valor" + classId).val());
     if (valorAtual > 0) {
-        var ssjssjs = parseInt(--valorAtual);
-        console.log(ssjssjs);
-        var novoValor = $(".valor" + classId).val(ssjssjs);
+        var valNumFloa = parseInt(--valorAtual);
+        var novoValor = $(".valor" + classId).val(valNumFloa);
     }
 
 
