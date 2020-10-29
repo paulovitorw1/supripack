@@ -311,7 +311,7 @@
                                     <font style="vertical-align: inherit;">Subtotal do carrinho </font>
                                 </font><span>
                                     <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">$ 59</font>
+                                        <font style="vertical-align: inherit;" class="valorTotalProdutos">R$ 0,00</font>
                                     </font>
                                 </span>
                             </li>

@@ -35,6 +35,9 @@ class CarrinhoController extends Controller
 
         // dd($collectionConsultaProd);
         return DataTables::of($collectionConsultaProd)
+            ->addColumn('valorUnidade', function ($collectionConsultaProd) {
+                return '<p class="valorUnidade' . $collectionConsultaProd->id . ' tdvalorUnidade">' . $collectionConsultaProd->valor_uni_tributavel . '</p>';
+            })
             ->addColumn('action', function ($collectionConsultaProd) {
                 return
                     '<div class="cart_quantity_button">
@@ -57,9 +60,10 @@ class CarrinhoController extends Controller
                     '<a class="cart_quantity_delete" href="javascript:void(0)" onclick="removeProduto(' . $collectionConsultaProd->id . ');"><i class="fa fa-times"></i></a>';
             })
             ->addColumn('valorTotal', function ($collectionConsultaProd) {
-                return '<p class="valorTotal' . $collectionConsultaProd->id . '">' . $collectionConsultaProd->valor_uni_tributavel . '<p/>';
+
+                return '<p class="valorTotal' . $collectionConsultaProd->id . ' tdvalorTotal">' . $collectionConsultaProd->valor_uni_tributavel . '</p>';
             })
-            ->rawColumns(['action', 'valorTotal', 'removeProduto'])
+            ->rawColumns(['valorUnidade', 'action', 'valorTotal', 'removeProduto'])
             ->toJson();
 
         // ->make(true);

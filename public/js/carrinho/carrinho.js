@@ -34,35 +34,29 @@ function getProdutoStorange() {
                 cache: true,
                 type: "POST",
             },
+            "initComplete": function (settings, json) {
+                masksss();
+            },
             "columnDefs": [
                 //Class btn delete produto
                 { className: "cart_delete", "targets": [6] },
                 // { className: "valorTotalP", "targets": [5] },
 
-                //convertendo valores para moeda brasileira
-                {
-                    "render": function (data) {
-                        return parseFloat(data).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-                    },
-                    "targets": [3]
-                }
+                // //convertendo valores para moeda brasileira
+                // {
+                //     "render": function (data) {
+                //         return parseFloat(data).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                //     },
+                //     "targets": [3]
+                // }
             ],
             columns: [
                 { data: 'id' },
                 { data: 'descr' },
                 { data: 'descr' },
-                { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
+                { data: 'valorUnidade', name: 'valorUnidade', orderable: false, searchable: false },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
-                // { data: 'valor_uni_tributavel', defaultContent: "<i>Not set</i>" },
-                {
-                    'data': 'valorTotal',
-                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        console.log(oData);
-                        $(nTd).html(oData.valorTotal);
-                    }
-                },
-    
-                // { data: 'valorTotal', name: 'valorTotal', className: 'valorTotalP', orderable: false, searchable: false, defaultContent: "<i>Not set</i>" },
+                { data: 'valorTotal', name: 'valorTotal', className: 'valorTotalP', orderable: false, searchable: false, defaultContent: "<i>Not set</i>" },
                 { data: 'removeProduto', name: 'removeProduto', orderable: false, searchable: false }
 
             ],
@@ -89,24 +83,29 @@ function getProdutoStorange() {
                     "sLast": "Último"
                 }
             }
+
         });
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/inicial/carrinho/lista/produto",
-        //     data: {
-        //         idProdutos: getlocalStorage
-        //     },
-        //     dataType: "JSON",
-        //     success: function (data) {
-        //         console.log(data)
-        //     }, error: function (erros) {
-        //         console.log(erros);
 
-        //     }
-        // });
+
     }
-}
 
+}
+function masksss() {
+    $('.tdvalorTotal').each(function (index, element) {
+        var ssss = $(this).text();
+        var valorCOnv = parseFloat(ssss).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        $(this).text(valorCOnv)
+        // console.log(ssss);
+
+    });
+    $('.tdvalorUnidade').each(function (index, element) {
+        var tdvalorUnidade = $(this).text();
+        var tdvalorUnidadeConv = parseFloat(tdvalorUnidade).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        $(this).text(tdvalorUnidadeConv)
+        // console.log(ssss);
+
+    });
+}
 $("#aplicaCupom").click(function (e) {
     e.preventDefault();
     var valorCupom;
@@ -228,13 +227,25 @@ $("#checkboxcupom").change(function (e) {
 });
 
 function quantdd(classId) {
+    var somar = '';
+    var valorReal = '';
     var valorAtual = Number($(".valor" + classId).val());
+    //Incrementando valor da quantidade a cada click
     var valNumreal = Number(++valorAtual);
-
+    //Passando a novo valor de quantidade
     var novoValor = $(".valor" + classId).val(valNumreal);
-    var tesste = $(novoValor).val();
 
-    console.log($('.valorTotalP').text());
+    valorReal = $('.valorUnidade' + classId).text();
+    //Removendo Caracteres especiais e letras
+    var valorSplit = valorReal.replace(/R[^A-Za-z0-9_]\s/, '');
+    var valorSemMask = valorSplit.toString().replace(",", ".");
+    //Multiplicando o valor unidade do produto pela quantidade
+    somar = valNumreal * valorSemMask;
+    //Convertendo o resultado para moeda Brasileira
+    var tdvalorUnidadeConv = parseFloat(somar).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+    //Adicionando no html
+    $('.valorTotal' + classId).text(tdvalorUnidadeConv);
+    $('.valorTotalProdutos').text(tdvalorUnidadeConv);
 
 
 }
