@@ -12,7 +12,10 @@ $(document).ready(function () {
 
     getProdutoStorange();
 
+    $('.cart_quantity_up').click(function (e) {
+        console.log('dasdas');
 
+    });
 
 });
 
@@ -36,6 +39,7 @@ function getProdutoStorange() {
             },
             "initComplete": function (settings, json) {
                 masksss();
+                valorProduto();
             },
             "columnDefs": [
                 //Class btn delete produto
@@ -90,6 +94,18 @@ function getProdutoStorange() {
     }
 
 }
+function valorProduto() {
+    $('.tdvalorTotal').each(function (index, element) {
+        var ssss = $(this).text();
+        var valorSplit = ssss.replace(/R[^A-Za-z0-9_]\s/, '');
+        var valorSemMask = valorSplit.toString().replace(",", ".");
+        console.log(valorSemMask);
+        // var valorCOnv = parseFloat(ssss).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        // $(this).text(valorCOnv)
+
+    });
+}
+
 function masksss() {
     $('.tdvalorTotal').each(function (index, element) {
         var ssss = $(this).text();
@@ -226,6 +242,7 @@ $("#checkboxcupom").change(function (e) {
     }
 });
 
+
 function quantdd(classId) {
     var somar = '';
     var valorReal = '';
@@ -250,10 +267,24 @@ function quantdd(classId) {
 
 }
 function quantRemove(classId) {
+    var somar = '';
+    var valorReal = '';
     var valorAtual = Number.parseInt($(".valor" + classId).val());
     if (valorAtual > 0) {
         var valNumFloa = parseInt(--valorAtual);
         var novoValor = $(".valor" + classId).val(valNumFloa);
+
+        valorReal = $('.valorUnidade' + classId).text();
+        //Removendo Caracteres especiais e letras
+        var valorSplit = valorReal.replace(/R[^A-Za-z0-9_]\s/, '');
+        var valorSemMask = valorSplit.toString().replace(",", ".");
+        //Multiplicando o valor unidade do produto pela quantidade
+        somar = valorAtual * valorSemMask;
+        //Convertendo o resultado para moeda Brasileira
+        var tdvalorUnidadeConv = parseFloat(somar).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        //Adicionando no html
+        $('.valorTotal' + classId).text(tdvalorUnidadeConv);
+        $('.valorTotalProdutos').text(tdvalorUnidadeConv);
     }
 
 

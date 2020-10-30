@@ -47,7 +47,7 @@ class CarrinhoController extends Controller
                     </font>
                 </a>
                     <input class="cart_quantity_input valor' . $collectionConsultaProd->id . '" type="text" name="quantity" value="1"
-                        autocomplete="off" size="2">
+                        autocomplete="off" size="2" disabled>
                         <a class="cart_quantity_up " href="javascript:void(0)" onclick="quantdd(' . $collectionConsultaProd->id . ')" id="mais">
                         <font style="vertical-align: inherit;">
                             <font style="vertical-align: inherit;"> + </font>
